@@ -8,6 +8,21 @@
 
 :package: **15 个专家包** &nbsp;|&nbsp; :jigsaw: **专家 Agents + 专属 Skills** &nbsp;|&nbsp; :zap: **开箱即用**
 
+[![Stars](https://img.shields.io/github/stars/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts/stargazers)
+[![Forks](https://img.shields.io/github/forks/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts/forks)
+[![Issues](https://img.shields.io/github/issues/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts/pulls)
+[![Contributors](https://img.shields.io/github/contributors/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts/graphs/contributors)
+[![Last Commit](https://img.shields.io/github/last-commit/caixibei/tc-experts/main?style=flat&logo=github)](https://github.com/caixibei/tc-experts/commits/main)
+[![Commit Activity](https://img.shields.io/github/commit-activity/m/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts/commits/main)
+[![Repo Size](https://img.shields.io/github/repo-size/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts)
+[![Languages](https://img.shields.io/github/languages/count/caixibei/tc-experts?style=flat&logo=github)](https://github.com/caixibei/tc-experts)
+
+![Platform](https://img.shields.io/badge/Platform-ZCode_Plugin-0969DA)
+![Experts](https://img.shields.io/badge/Domain_Experts-15-2EA043)
+![Version](https://img.shields.io/badge/Version-0.1.0-8250DF)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/caixibei/tc-experts/pulls)
+
 </div>
 
 ---
@@ -35,9 +50,20 @@
         └── tc-experts/       ← ⚙️ TC Experts 插件本体
 ```
 
-> :bulb: 各专家包内含 `agents/`（专家定义）、`skills/`（专属技能）与 `avatars/`（头像）等，具体以各包实际内容为准。
+> [!TIP]
+> 各专家包内含 `agents/`（专家定义）、`skills/`（专属技能）与 `avatars/`（头像）等，具体以各包实际内容为准。
 
 ## :busts_in_silhouette: 专家团一览
+
+```mermaid
+pie showData
+    title 专家领域分布（共 15 位）
+    "架构与研发" : 6
+    "管理与协作" : 2
+    "设计" : 2
+    "内容与微信生态" : 4
+    "商业与咨询" : 1
+```
 
 ### :hammer_and_wrench: 架构与研发
 
@@ -98,4 +124,5 @@
 
 ## :page_facing_up: 许可证
 
-:lock: 各专家包的许可证以其目录内 `license/` / `LICENSE` 等文件为准，使用前请自行确认。
+> [!IMPORTANT]
+> :lock: 各专家包的许可证以其目录内 `license/` / `LICENSE` 等文件为准，使用前请自行确认。
