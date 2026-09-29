@@ -47,7 +47,7 @@
 | :triangular_ruler: **架构通 · 软件架构师** | [`software-architect`](./workbuddy/software-architect) | 站在全局高度设计可扩展、高可用架构 |
 | :computer: **全栈开发专家** | [`fullstack-dev`](./workbuddy/fullstack-dev) | 需求澄清 → 架构设计 → 开发 → 测试 → 上线全流程交付 |
 | :keyboard: **吴八哥 · 高级开发工程师** | [`senior-developer`](./workbuddy/senior-developer) | 10 年以上全栈经验，团队的技术中坚 |
-| :microchip: **固件通 · 嵌入式固件工程师** | [`embedded-firmware-engineer`](./workbuddy/embedded-firmware-engineer) | 精通微控制器，在资源受限硬件上写高效可靠固件 |
+| :electric_plug: **固件通 · 嵌入式固件工程师** | [`embedded-firmware-engineer`](./workbuddy/embedded-firmware-engineer) | 精通微控制器，在资源受限硬件上写高效可靠固件 |
 | :globe_with_meridians: **网站开发与部署专家** | [`web`](./workbuddy/web) | 开发 → 调试 → 性能/SEO → 部署上线全流程 |
 
 ### :bar_chart: 管理与协作
