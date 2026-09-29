@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.agent-task/v1",
+  "title": "Bounded Agent Task",
+  "type": "object",
+  "required": ["taskId", "type", "scope", "inputs", "deliverable", "timeoutSeconds", "maxRetries", "partialDeliveryRule", "forbiddenWrites", "evidenceRequirement"],
+  "properties": {
+    "taskId": {"type": "string", "minLength": 1},
+    "type": {"enum": ["research", "material_observation", "review", "drafting", "integration", "release_check"]},
+    "scope": {"type": "string", "minLength": 1},
+    "excludes": {"type": "array", "items": {"type": "string"}},
+    "inputs": {"type": "array", "items": {"type": "string"}},
+    "deliverable": {"type": "string", "minLength": 1},
+    "outputPath": {"type": ["string", "null"]},
+    "timeoutSeconds": {"type": "integer", "minimum": 1},
+    "maxRetries": {"type": "integer", "minimum": 0},
+    "partialDeliveryRule": {"type": "string", "minLength": 1},
+    "forbiddenWrites": {"type": "array", "items": {"type": "string"}},
+    "evidenceRequirement": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["planned", "running", "completed", "partial", "timed_out", "failed", "cancelled"]}
+  },
+  "additionalProperties": false
+}

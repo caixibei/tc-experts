@@ -1,0 +1,33 @@
+{
+  "schema": "manuscriptos.chapter-task/v1",
+  "runId": "run_example",
+  "chapterId": "ch_03",
+  "chapterTitle": "第三章 组织沿革",
+  "workerRole": "evidence_worker",
+  "taskClass": "evidence_batch",
+  "revision": 1,
+  "objective": "核对本章引用的 12 条主张，标出无来源支持与相互冲突的项",
+  "factSlices": [
+    "只放与本批相关且已脱敏的事实切片"
+  ],
+  "evidenceRefs": [
+    "source:0000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "scope": {
+    "coveredTargets": ["ch_03"],
+    "excludedTargets": ["ch_01", "ch_02"],
+    "byteOrPageBudget": 262144,
+    "timeoutSeconds": 300
+  },
+  "chapterDraftIsolation": true,
+  "returnTo": "writing_owner",
+  "resultTarget": "results/ch_03/evidence_worker.r1.json",
+  "receiptTarget": "receipts/ch_03/evidence_worker.r1.receipt.json",
+  "stopCondition": "covered_targets_exhausted_or_budget_exceeded",
+  "forbidden": [
+    "不得直接改写正文",
+    "不得修改原始材料",
+    "不得创建除 resultTarget 之外的文件",
+    "不得把未读到的内容报告为已覆盖"
+  ]
+}

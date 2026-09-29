@@ -1,0 +1,58 @@
+{
+  "schema": "fbsir.long-manuscript.fallback-matrix/v1",
+  "product": {
+    "packageId": "long-manuscript-expert",
+    "productVersion": "26.9.18"
+  },
+  "purpose": "定义长文档交付格式的降级链。降级不等于请求格式达成；没有宿主能力与回读证据时，不得声明请求格式已完成。",
+  "packageVerifiedFormats": [
+    "markdown_manuscript",
+    "markdown_transcript",
+    "markdown_memo",
+    "self_contained_html"
+  ],
+  "conditionalFormats": [
+    "docx",
+    "pdf",
+    "pptx",
+    "xlsx",
+    "epub",
+    "bilingual"
+  ],
+  "formats": {
+    "markdown_manuscript": { "fallbackFormats": ["chat"], "stateWithoutFallbackAcceptance": "ready" },
+    "markdown_transcript": { "fallbackFormats": ["chat"], "stateWithoutFallbackAcceptance": "ready" },
+    "markdown_memo": { "fallbackFormats": ["chat"], "stateWithoutFallbackAcceptance": "ready" },
+    "self_contained_html": { "fallbackFormats": ["markdown_manuscript", "chat"], "stateWithoutFallbackAcceptance": "degraded" },
+    "docx": { "fallbackFormats": ["self_contained_html", "markdown_manuscript", "chat"], "stateWithoutFallbackAcceptance": "degraded" },
+    "pdf": { "fallbackFormats": ["self_contained_html", "markdown_manuscript", "chat"], "stateWithoutFallbackAcceptance": "degraded" },
+    "pptx": { "fallbackFormats": ["self_contained_html", "markdown_memo", "chat"], "stateWithoutFallbackAcceptance": "degraded" },
+    "xlsx": { "fallbackFormats": ["markdown_manuscript", "chat"], "stateWithoutFallbackAcceptance": "degraded" },
+    "epub": { "fallbackFormats": ["self_contained_html", "markdown_manuscript", "chat"], "stateWithoutFallbackAcceptance": "degraded" },
+    "bilingual": { "fallbackFormats": ["markdown_manuscript", "chat"], "stateWithoutFallbackAcceptance": "degraded" }
+  },
+  "degradationArtifacts": {
+    "docx": "markdown_structure_not_docx",
+    "pdf": "markdown_structure_not_pdf",
+    "pptx": "page_outline_and_speaker_notes_not_pptx",
+    "xlsx": "table_in_markdown_not_xlsx",
+    "epub": "markdown_manuscript_not_epub",
+    "bilingual": "glossary_draft_not_certified_translation",
+    "self_contained_html": "markdown_source_not_html_preview"
+  },
+  "rules": {
+    "blockedMayDeliverFallback": false,
+    "fallbackDoesNotEqualRequestedFormat": true,
+    "userAcceptanceMayReclassify": true,
+    "falseSuccessForbidden": "FORMAT_FALSE_SUCCESS_FORBIDDEN",
+    "renameExtensionIsNotDelivery": true,
+    "onePrimaryOneCompanion": true,
+    "maxRequestedFormats": 8
+  },
+  "notes": [
+    "改扩展名、换渲染器标签或把 Markdown 包进 .docx 都不构成该格式的交付。",
+    "DOCX 交付需要宿主真实提供转换能力，并对产出文件完成解析回读；解析通过不等于版式通过。",
+    "降级产物必须在交付说明中写明它是降级产物，且列出缺失的能力层。"
+  ],
+  "evidenceBoundary": "package_local_format_policy_only_not_host_capability_proof_or_rendering_acceptance"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "manuscriptos.chapter-failure/v1",
+  "runId": "run_example",
+  "chapterId": "ch_03",
+  "workerRole": "evidence_worker",
+  "taskClass": "evidence_batch",
+  "revision": 1,
+  "status": "unavailable_after_retry",
+  "attempts": 2,
+  "reasonCode": "retry_exhausted",
+  "reasonCodes": [
+    "material_not_readable",
+    "budget_exceeded",
+    "timeout",
+    "scope_conflict",
+    "retry_exhausted",
+    "capability_unavailable",
+    "unknown"
+  ],
+  "recordedBy": "writing_owner",
+  "recordedAt": "2026-09-18T00:00:00.000Z",
+  "detailHash": null,
+  "impact": {
+    "affectedTargets": ["ch_03"],
+    "canContinueElsewhere": true,
+    "nextAction": "只含一个动作的下一步"
+  },
+  "notes": [
+    "失败信封不得夹带未经验证的正文。",
+    "detailHash 为空表示没有可绑定的详情摘要，不得编造。",
+    "reasonCode 必须取自 reasonCodes 枚举；无法归类时用 unknown，并写明已排除的可能。"
+  ]
+}

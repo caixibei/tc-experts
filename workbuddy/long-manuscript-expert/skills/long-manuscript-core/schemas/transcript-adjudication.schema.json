@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema", "$id": "https://u3w.com/schemas/manuscriptos/transcript-adjudication.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "comparisonDigest", "entries", "status", "verifiedDecisionCount", "unresolvedDecisionCount", "hostMutationAllowed", "ledgerDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "artifactType": { "const": "manuscriptos_transcript_adjudication" }, "comparisonDigest": { "$ref": "#/$defs/sha256" },
+    "entries": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/entry" } }, "status": { "enum": ["complete", "partial"] }, "verifiedDecisionCount": { "type": "integer", "minimum": 0 }, "unresolvedDecisionCount": { "type": "integer", "minimum": 0 }, "hostMutationAllowed": { "const": false }, "ledgerDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "entry": { "type": "object", "additionalProperties": false, "required": ["page", "anchor", "candidateReadings", "sourceRef", "sourceReading", "winner", "confidence", "evidenceState", "notes"], "properties": { "page": { "type": "integer", "minimum": 1 }, "anchor": { "type": "string", "minLength": 1 }, "candidateReadings": { "type": "object", "minProperties": 1, "additionalProperties": { "type": "string" } }, "sourceRef": { "type": ["string", "null"] }, "sourceReading": { "type": ["string", "null"] }, "winner": { "type": ["string", "null"] }, "confidence": { "enum": ["low", "medium", "high", null] }, "evidenceState": { "enum": ["source_image_reviewed", "advisory"] }, "notes": { "type": ["string", "null"] } } }
+  }
+}

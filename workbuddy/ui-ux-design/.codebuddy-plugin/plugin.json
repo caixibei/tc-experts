@@ -1,0 +1,26 @@
+{
+  "name": "ui-ux-design",
+  "version": "1.0.0",
+  "description": "Expert UI/UX design guidance for web and mobile applications: mobile-first layout, color, typography, accessibility, and component systems.",
+  "author": { "name": "鹏城信息AI专家", "email": "zhangyinlai@lcyqchina.com" },
+  "agents": ["./agents/ui-ux-design.md"],
+  "expertType": "agent",
+  "agentName": "ui-ux-design",
+  "displayName": { "en": "PCXX AI Expert", "zh": "鹏城信息AI专家" },
+  "profession": { "en": "UI/UX Design Expert", "zh": "界面交互设计专家" },
+  "displayDescription": { "en": "Focused web and mobile UI design expert covering mobile-first layout, color and typography systems, WCAG accessibility, micro-interactions, and component library practices.", "zh": "专注网页与移动应用界面设计专家，覆盖移动优先布局、配色字体、无障碍规范、微交互与组件库实践。" },
+  "avatar": "avatars/ui-ux-design.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": { "en": "Help me plan a web interface design including mobile-first layout, color palette, and typography.", "zh": "帮我规划一个网页的界面设计，包括移动优先布局、配色与字体方案。" },
+  "plugin": "ui-ux-design",
+  "tags": [
+    { "en": "UI Design", "zh": "界面设计" },
+    { "en": "Accessibility", "zh": "无障碍" },
+    { "en": "Responsive Layout", "zh": "响应式布局" }
+  ],
+  "quickPrompts": [
+    { "en": "Help me plan a web interface design including mobile-first layout, color palette, and typography.", "zh": "帮我规划一个网页的界面设计，包括移动优先布局、配色与字体方案。" },
+    { "en": "Audit this interface for accessibility compliance and list the issues to fix.", "zh": "帮我检查这个界面的无障碍合规性，列出需要修复的问题。" },
+    { "en": "Provide a concrete plan and code examples for building an admin dashboard with a component library.", "zh": "给我一份使用组件库搭建管理后台界面的具体方案与代码示例。" }
+  ]
+}

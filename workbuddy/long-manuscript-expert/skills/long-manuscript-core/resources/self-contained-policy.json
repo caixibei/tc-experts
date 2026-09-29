@@ -1,0 +1,46 @@
+{
+  "connectorRequired": false,
+  "donorSkillRequired": false,
+  "externalRuntimeDependencies": [],
+  "forbiddenRuntimeReferences": [
+    "fbs-bookwriter",
+    "skills/fbs-bookwriter",
+    "book-co-creator/skills/fbs-bookwriter"
+  ],
+  "optionalAdapterPorts": [
+    "MaterialSourcePort",
+    "StructuredIntakePort",
+    "CollaborationPort",
+    "ReviewPort",
+    "DeliveryPort",
+    "NotificationPort",
+    "EntitlementPort",
+    "ReceiptPort"
+  ],
+  "requiredCapabilityIds": [
+    "scene-router",
+    "scene-composer",
+    "material-activation",
+    "multimodal-normalizer",
+    "research-verification",
+    "source-ledger-claim-graph",
+    "entity-timeline-continuity",
+    "scope-lock-diff",
+    "voice-profile-humanizer",
+    "chapter-planning-expansion",
+    "review-revise-quality-loop",
+    "rights-privacy-consent",
+    "multi-format-rendering",
+    "media-illustration-planning",
+    "continuation-recovery",
+    "asset-repurposing",
+    "source-transcription",
+    "transcription-adjudication",
+    "capability-preflight",
+    "project-control",
+    "review-briefing",
+    "artifact-derivation"
+  ],
+  "runtimeSelfContained": true,
+  "schemaVersion": "1.0.0"
+}

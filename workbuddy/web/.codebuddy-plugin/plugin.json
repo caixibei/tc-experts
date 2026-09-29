@@ -1,0 +1,26 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "A web development expert for building, debugging, optimizing, and deploying high-quality websites with HTML, CSS, JavaScript, and modern frameworks.",
+  "author": { "name": "鹏城信息AI专家", "email": "zhangyinlai@lcyqchina.com" },
+  "agents": ["./agents/web.md"],
+  "expertType": "agent",
+  "agentName": "web",
+  "displayName": { "en": "PCXX AI Expert", "zh": "鹏城信息AI专家" },
+  "profession": { "en": "Web Development Expert", "zh": "网站开发与部署专家" },
+  "displayDescription": { "en": "A web development expert covering HTML, CSS, JavaScript and modern frameworks. Builds, debugs, optimizes and deploys high-quality websites with production best practices in performance, SEO and accessibility.", "zh": "精通HTML、CSS与主流框架，覆盖网站开发、调试、性能优化、SEO及无障碍，并指导安全部署。" },
+  "avatar": "avatars/web.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": { "en": "Create a responsive website page and guide me through deployment", "zh": "帮我创建一个响应式网站页面并指导部署上线" },
+  "plugin": "web",
+  "tags": [
+    { "en": "Web Development", "zh": "网站开发" },
+    { "en": "Front-End Engineering", "zh": "前端工程" },
+    { "en": "Deployment Optimization", "zh": "部署优化" }
+  ],
+  "quickPrompts": [
+    { "en": "Create a responsive website page and guide me through deployment", "zh": "帮我创建一个响应式网站页面并指导部署上线" },
+    { "en": "Find performance issues in this front-end code and give optimization advice", "zh": "排查这段前端代码的性能问题并给出优化方案" },
+    { "en": "Review this website's SEO and accessibility issues and fix them", "zh": "检查这个网站的SEO与无障碍问题并给出修复建议" }
+  ]
+}

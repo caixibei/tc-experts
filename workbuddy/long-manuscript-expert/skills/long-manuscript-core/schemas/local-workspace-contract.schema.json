@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.local-workspace-contract/v1",
+  "title": "Local Workspace Contract",
+  "type": "object",
+  "required": ["workspace", "scopeMode", "materialItems", "outputRoot", "writeMode", "onlineDependencyPolicy", "recoveryCheckpoint"],
+  "properties": {
+    "workspace": {"type": "string", "minLength": 1},
+    "scopeMode": {"enum": ["selected_files_only", "selected_ranges_only", "user_context_only"]},
+    "materialItems": {"type": "array", "items": {"$ref": "#/$defs/materialItem"}},
+    "outputRoot": {"type": "string", "minLength": 1},
+    "writeMode": {"enum": ["new_version", "user_confirmed_overwrite", "chat_only"]},
+    "onlineDependencyPolicy": {"enum": ["local", "local_with_remote_model", "connector_enhanced", "online_optional", "degraded", "unsupported"]},
+    "sensitivityDefault": {"enum": ["unknown", "ordinary", "restricted", "private", "high_risk"]},
+    "recoveryCheckpoint": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "materialItem": {
+      "type": "object",
+      "required": ["path", "readScope", "includedByUser", "status"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "readScope": {"type": "string", "minLength": 1},
+        "includedByUser": {"type": "boolean"},
+        "status": {"enum": ["listed_not_read", "read", "read_partial", "unsupported", "permission_needed", "excluded"]},
+        "sensitivity": {"enum": ["unknown", "ordinary", "restricted", "private", "high_risk"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "invariants": [
+    "Selecting a workspace does not authorize reading every file.",
+    "Listing a file does not mean its contents were read.",
+    "Removing an item from scope never deletes the local file.",
+    "Original files are not overwritten by default.",
+    "Local-first is not an absolute offline guarantee."
+  ],
+  "additionalProperties": false
+}

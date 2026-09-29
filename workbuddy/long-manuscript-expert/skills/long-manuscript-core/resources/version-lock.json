@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "fbs.version-lock/v1",
+  "expertVersion": "26.9.10",
+  "baselineExpertVersion": "26.8.26",
+  "kernelVersion": "c13",
+  "workspaceSchemaVersion": "1.0.0-dev",
+  "buddyPackageSchemaVersion": "1.0.0-dev",
+  "connectorPackageVersion": "26.8.20",
+  "connectorContractVersion": "1.2.9",
+  "targetHostProduct": "WorkBuddy",
+  "targetWorkbuddyVersion": "5.5.3",
+  "minimumWorkbuddyVersion": null,
+  "minimumCompatibilityState": "not_proven",
+  "scope": {
+    "packageScope": "long-manuscript-expert-only",
+    "sampleBuddy": "industry-research-report",
+    "p0AudioVideo": "bounded content-reference intake; current WorkBuddy-derived ASR/keyframe receipt required; no package-local decoding claim",
+    "connectorPolicy": "optional-enhancement-nonblocking"
+  },
+  "fbsBookwriterDonorVersion": "3.0.1",
+  "sourceOfTruth": {
+    "expertVersion": ".codebuddy-plugin/plugin.json",
+    "schemaAndPolicy": "skills/long-manuscript-core/resources/version-lock.json",
+    "fileManifest": "FILE-MANIFEST.sha256.json"
+  },
+  "status": "development-baseline",
+  "releaseBlockedUntil": [
+    "P0-00 through P0-23 completed",
+    "60-case regression completed",
+    "package validation passed",
+    "WorkBuddy 5.5.3 host smoke passed",
+    "human release approval"
+  ]
+}

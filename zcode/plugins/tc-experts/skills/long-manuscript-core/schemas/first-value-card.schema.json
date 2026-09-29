@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.first-value-card/v1",
+  "title": "First Value Card",
+  "type": "object",
+  "required": ["materialScope", "knownFactsAndAssumptions", "primaryArtifact", "risks", "singleNextStep"],
+  "properties": {
+    "materialScope": {"type": "array", "items": {"type": "string"}},
+    "teacherOrAuthorGoal": {"type": ["string", "null"]},
+    "knownFactsAndAssumptions": {"type": "array", "items": {"type": "string"}},
+    "primaryArtifact": {"type": "string", "minLength": 1},
+    "companionArtifacts": {"type": "array", "maxItems": 2, "items": {"type": "string"}},
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "singleNextStep": {"type": "string", "minLength": 1},
+    "continuationPrompt": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

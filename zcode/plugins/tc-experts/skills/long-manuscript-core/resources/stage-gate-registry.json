@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "fbs.stage-gate-registry/v2",
+  "projectLifecycleAuthority": "resources/project-state-policy.json",
+  "upgradeAlignment": "references/upgrade-alignment.md",
+  "bookwriterRuntimeDependency": false,
+  "stages": {
+    "S0": {"name": "material_activation", "requiredGates": ["workspace_scope", "source_inventory", "material_sufficiency"], "transitionTo": ["S1"]},
+    "S1": {"name": "objective_and_audience", "requiredGates": ["objective_binding", "audience_defined", "risk_scope"], "transitionTo": ["S2"]},
+    "S2": {"name": "outline_and_brief", "requiredGates": ["outline_present", "chapter_briefs_present", "outline_freeze_or_user_override"], "transitionTo": ["S3"]},
+    "S3": {"name": "chapter_drafting", "requiredGates": ["approved_facts", "scope_lock", "chapter_checkpoint"], "transitionTo": ["S3.5", "S3.7", "S4"]},
+    "S4": {"name": "merge_and_continuity", "requiredGates": ["chapter_status_complete", "merge_integrity", "cross_chapter_consistency"], "transitionTo": ["S5"]},
+    "S5": {"name": "quality_and_delivery_review", "requiredGates": ["quality_profile", "claim_support", "temporal_validity", "privacy_rights", "final_clean"], "transitionTo": ["S6"]},
+    "S6": {"name": "reuse_and_release", "requiredGates": ["release_governor", "delivery_manifest", "human_release_gate"], "transitionTo": []}
+  },
+  "optionalStageOverlays": {
+    "S3.5": {"name": "expansion", "requiredGates": ["expansion_plan_confirmed", "source_backup", "measured_word_count", "minimum_quality"], "transitionTo": ["S3.7", "S4"]},
+    "S3.7": {"name": "refinement", "requiredGates": ["refinement_scope", "source_backup", "quality_audit"], "transitionTo": ["S4"]}
+  },
+  "receiptPolicy": {
+    "schemaVersion": "fbs.stage-gate-receipt/v1",
+    "maxAgeSeconds": 86400,
+    "requirePhysicalJsonPath": true,
+    "requireProjectBinding": true,
+    "requireInputDigestBinding": true,
+    "requireSelfDigest": true,
+    "nonOverridableGates": ["risk_scope", "privacy_rights", "human_release_gate"],
+    "nonOverridableGatePatterns": ["safety", "rights", "privacy", "consent", "human"]
+  },
+  "rules": [
+    "A stage label does not prove that its gates ran.",
+    "A transition requires current receipts for all applicable required gates.",
+    "A user-approved override must be recorded and cannot silently skip a safety or rights gate.",
+    "Connector state never selects a stage or closes a stage gate."
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_user_entry_registry",
+  "productId": "long-manuscript-expert",
+  "targetVersion": "26.9.10",
+  "defaultEntryId": "material_start",
+  "quickPromptCount": 3,
+  "entryCount": 5,
+  "declaredProductShape": {
+    "sceneCount": 21,
+    "sharedCapabilityCount": 23,
+    "operationModeCount": 11,
+    "durableObjectCount": 31,
+    "atomicVerbCount": 19,
+    "machineGateCount": 32,
+    "sourceFidelityGateCount": 3,
+    "optionalPortCount": 8,
+    "stageGateRegistry": "resources/stage-gate-registry.json",
+    "upgradeGapRegistry": "resources/upgrade-gap-registry.json"
+  },
+  "publicEvidencePolicy": {
+    "machineClaimWithoutCurrentReceipt": "advisory",
+    "currentReceiptRequired": true,
+    "officialListingClaimAllowed": false,
+    "hostValidationClaimAllowedWithoutReceipt": false,
+    "externalActionClaimAllowedWithoutReceipt": false
+  },
+  "entries": [
+    {
+      "entryId": "material_start",
+      "lifecycle": "active",
+      "operationMode": "material_activation",
+      "quickPromptOrdinals": [
+        1
+      ],
+      "displayName": {
+        "en": "Start from materials",
+        "zh": "用材料启动长文档"
+      },
+      "entrySignals": [
+        "start",
+        "outline",
+        "notes",
+        "interview",
+        "启动",
+        "提纲",
+        "笔记",
+        "访谈"
+      ],
+      "requiredInputs": [
+        "materials_or_topic_or_material_intake_request_v1"
+      ],
+      "firstValueContract": {
+        "inFirstReply": true,
+        "editableStructure": {
+          "required": true,
+          "examples": [
+            "manuscript_starter_card",
+            "outline_and_chapter_tasks"
+          ]
+        },
+        "substantiveText": {
+          "required": true,
+          "minimumParagraphs": 1,
+          "placeholderOnlyAllowed": false
+        },
+        "singleNextStep": {
+          "required": true,
+          "exactlyOne": true
+        },
+        "maximumBlockingQuestionCount": 1
+      },
+      "requiredDurableObjects": [
+        "ManuscriptProject",
+        "MaterialItem",
+        "ChapterPlan",
+        "ContinuationCapsule"
+      ],
+      "continuationHook": {
+        "nextEntryId": "project_resume",
+        "cta": "copy_continuation_prompt"
+      },
+      "connectorRequired": false,
+      "externalToolsAvailableSemantics": "declaration_only",
+      "externalToolAutoTriggerAllowed": false,
+      "optionalPortAutoTriggerAllowed": false,
+      "machineClaimWithoutCurrentReceipt": "advisory",
+      "forbiddenClaims": [
+        "officially_listed",
+        "host_validated",
+        "external_action_completed",
+        "file_saved_without_receipt"
+      ]
+    },
+    {
+      "entryId": "source_transcription",
+      "lifecycle": "active",
+      "operationMode": "source_transcription",
+      "quickPromptOrdinals": [
+        1
+      ],
+      "displayName": {
+        "en": "Faithfully transcribe sources",
+        "zh": "忠实转录来源材料"
+      },
+      "entrySignals": [
+        "transcribe",
+        "scan",
+        "page",
+        "ocr result",
+        "逐字稿",
+        "扫描页",
+        "页码",
+        "OCR结果"
+      ],
+      "requiredInputs": [
+        "material_intake_request_v1_or_workbuddy_visible_attachment_or_supplied_page_observation"
+      ],
+      "firstValueContract": {
+        "inFirstReply": true,
+        "editableStructure": {
+          "required": true,
+          "examples": [
+            "page_map",
+            "transcription_issue_list"
+          ]
+        },
+        "substantiveText": {
+          "required": true,
+          "minimumParagraphs": 1,
+          "placeholderOnlyAllowed": false
+        },
+        "singleNextStep": {
+          "required": true,
+          "exactlyOne": true
+        },
+        "maximumBlockingQuestionCount": 1
+      },
+      "requiredDurableObjects": [
+        "PageManifest",
+        "OcrObservation",
+        "TranscriptSnapshot",
+        "SourceFidelityStatus"
+      ],
+      "continuationHook": {
+        "nextEntryId": "source_transcription",
+        "cta": "supply_next_page_batch_or_resolve_one_issue"
+      },
+      "connectorRequired": false,
+      "hostNativeObservationPolicy": "consume_only_current_workbuddy_presented_or_readback_verified_content",
+      "externalToolsAvailableSemantics": "declaration_only",
+      "externalToolAutoTriggerAllowed": false,
+      "optionalPortAutoTriggerAllowed": false,
+      "machineClaimWithoutCurrentReceipt": "advisory",
+      "forbiddenClaims": [
+        "ocr_executed_by_package",
+        "officially_listed",
+        "host_validated",
+        "external_action_completed",
+        "file_saved_without_receipt"
+      ]
+    },
+    {
+      "entryId": "project_resume",
+      "lifecycle": "active",
+      "operationMode": "continuation",
+      "quickPromptOrdinals": [
+        2
+      ],
+      "displayName": {
+        "en": "Resume a manuscript project",
+        "zh": "继续已有手稿项目"
+      },
+      "entrySignals": [
+        "resume",
+        "continue project",
+        "checkpoint",
+        "继续项目",
+        "续接胶囊",
+        "检查点"
+      ],
+      "requiredInputs": [
+        "continuation_capsule_or_current_project_evidence"
+      ],
+      "optionalInputs": [
+        "project_status",
+        "chapter_checkpoint",
+        "fact_delta",
+        "manuscript_objective_binding"
+      ],
+      "degradedMode": "capsule_only",
+      "firstValueContract": {
+        "inFirstReply": true,
+        "editableStructure": {
+          "required": true,
+          "examples": [
+            "project_resume_card",
+            "next_section_plan"
+          ]
+        },
+        "substantiveText": {
+          "required": true,
+          "minimumParagraphs": 1,
+          "placeholderOnlyAllowed": false
+        },
+        "singleNextStep": {
+          "required": true,
+          "exactlyOne": true
+        },
+        "maximumBlockingQuestionCount": 1
+      },
+      "requiredDurableObjects": [
+        "ContinuationCapsule",
+        "ProjectStatus",
+        "ChapterCheckpoint",
+        "FactDelta",
+        "ManuscriptObjectiveBinding"
+      ],
+      "continuationHook": {
+        "nextEntryId": "project_resume",
+        "cta": "continue_from_reconciled_anchor"
+      },
+      "connectorRequired": false,
+      "externalToolsAvailableSemantics": "declaration_only",
+      "externalToolAutoTriggerAllowed": false,
+      "optionalPortAutoTriggerAllowed": false,
+      "machineClaimWithoutCurrentReceipt": "advisory",
+      "forbiddenClaims": [
+        "hidden_state_loaded",
+        "host_goal_resumed",
+        "officially_listed",
+        "host_validated",
+        "external_action_completed",
+        "file_saved_without_receipt"
+      ]
+    },
+    {
+      "entryId": "bounded_revision",
+      "lifecycle": "active",
+      "operationMode": "bounded_revision",
+      "quickPromptOrdinals": [
+        2
+      ],
+      "displayName": {
+        "en": "Revise a bounded scope",
+        "zh": "限定范围改稿"
+      },
+      "entrySignals": [
+        "revise this section",
+        "selected passage",
+        "bounded edit",
+        "只改这段",
+        "限定范围",
+        "局部改稿"
+      ],
+      "requiredInputs": [
+        "authorized_scope",
+        "source_text"
+      ],
+      "firstValueContract": {
+        "inFirstReply": true,
+        "editableStructure": {
+          "required": true,
+          "examples": [
+            "scope_and_change_map",
+            "before_after_anchors"
+          ]
+        },
+        "substantiveText": {
+          "required": true,
+          "minimumParagraphs": 1,
+          "placeholderOnlyAllowed": false
+        },
+        "singleNextStep": {
+          "required": true,
+          "exactlyOne": true
+        },
+        "maximumBlockingQuestionCount": 1
+      },
+      "requiredDurableObjects": [
+        "ScopeLock",
+        "ReviewCycle",
+        "CapabilityReceipt"
+      ],
+      "continuationHook": {
+        "nextEntryId": "bounded_revision",
+        "cta": "confirm_or_select_next_scope"
+      },
+      "connectorRequired": false,
+      "externalToolsAvailableSemantics": "declaration_only",
+      "externalToolAutoTriggerAllowed": false,
+      "optionalPortAutoTriggerAllowed": false,
+      "machineClaimWithoutCurrentReceipt": "advisory",
+      "forbiddenClaims": [
+        "unselected_text_changed",
+        "officially_listed",
+        "host_validated",
+        "external_action_completed",
+        "file_saved_without_receipt"
+      ]
+    },
+    {
+      "entryId": "finished_draft_closure",
+      "lifecycle": "active",
+      "operationMode": "finished_draft_closure",
+      "quickPromptOrdinals": [
+        3
+      ],
+      "displayName": {
+        "en": "Close a finished draft",
+        "zh": "收口成稿"
+      },
+      "entrySignals": [
+        "finish draft",
+        "closure review",
+        "delivery readiness",
+        "成稿收口",
+        "交付检查",
+        "终稿检查"
+      ],
+      "requiredInputs": [
+        "finished_or_near_finished_draft"
+      ],
+      "firstValueContract": {
+        "inFirstReply": true,
+        "editableStructure": {
+          "required": true,
+          "examples": [
+            "closure_checklist",
+            "remaining_risk_map"
+          ]
+        },
+        "substantiveText": {
+          "required": true,
+          "minimumParagraphs": 1,
+          "placeholderOnlyAllowed": false
+        },
+        "singleNextStep": {
+          "required": true,
+          "exactlyOne": true
+        },
+        "maximumBlockingQuestionCount": 1
+      },
+      "requiredDurableObjects": [
+        "ReviewCycle",
+        "DeliveryManifest",
+        "ReviewBrief",
+        "ArtifactProvenance"
+      ],
+      "continuationHook": {
+        "nextEntryId": "finished_draft_closure",
+        "cta": "resolve_highest_priority_remaining_risk"
+      },
+      "connectorRequired": false,
+      "externalToolsAvailableSemantics": "declaration_only",
+      "externalToolAutoTriggerAllowed": false,
+      "optionalPortAutoTriggerAllowed": false,
+      "machineClaimWithoutCurrentReceipt": "advisory",
+      "forbiddenClaims": [
+        "all_machine_gates_passed_without_current_receipt",
+        "officially_listed",
+        "host_validated",
+        "external_action_completed",
+        "file_saved_without_receipt"
+      ]
+    }
+  ],
+  "upgradeBaseline": "26.8.26"
+}

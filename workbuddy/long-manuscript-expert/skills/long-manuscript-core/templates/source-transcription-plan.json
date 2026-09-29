@@ -1,0 +1,16 @@
+{
+  "operationMode": "source_transcription",
+  "steps": [
+    "map_pages",
+    "accept_supplied_observations",
+    "preserve_raw_snapshot",
+    "review_against_source",
+    "sample_validate",
+    "run_source_fidelity_gates",
+    "prepare_host_delivery"
+  ],
+  "actualOcrExecutionAllowed": false,
+  "suppliedObservationRequired": true,
+  "hostMutationAllowed": false,
+  "externalActionCount": 0
+}

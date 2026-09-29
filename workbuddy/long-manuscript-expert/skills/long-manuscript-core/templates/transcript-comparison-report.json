@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_transcript_comparison_brief",
+  "preferredBaseId": null,
+  "candidateIds": [],
+  "lowSimilarityPages": [],
+  "numericConflictPages": [],
+  "sourceAdjudicationRequired": true,
+  "sourceVerified": false,
+  "evidenceState": "advisory",
+  "hostMutationAllowed": false
+}

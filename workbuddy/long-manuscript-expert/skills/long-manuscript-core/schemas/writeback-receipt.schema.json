@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.writeback-receipt/v1",
+  "title": "Workspace Write-back Receipt",
+  "type": "object",
+  "required": ["writeMode", "targetPath", "requestedByUser", "writeResult", "readBackCheck", "status"],
+  "properties": {
+    "writeMode": {"enum": ["new_version", "user_confirmed_overwrite", "chat_only"]},
+    "targetPath": {"type": "string", "minLength": 1},
+    "requestedByUser": {"type": "boolean"},
+    "writeResult": {"enum": ["written", "not_executed", "conflict", "failed"]},
+    "readBackCheck": {"enum": ["passed", "failed", "not_run"]},
+    "contentDigest": {"type": ["string", "null"]},
+    "status": {"enum": ["draft_delivered", "saved_and_read_back", "not_executed", "write_conflict", "writeback_unconfirmed"]},
+    "error": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

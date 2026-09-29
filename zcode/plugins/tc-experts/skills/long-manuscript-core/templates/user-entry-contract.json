@@ -1,0 +1,18 @@
+{
+  "entryId": "material_start",
+  "operationMode": "material_activation",
+  "inputSummary": [],
+  "firstValue": {
+    "editableStructure": {},
+    "substantiveText": "",
+    "singleNextStep": ""
+  },
+  "evidenceState": "advisory",
+  "currentMachineReceiptDigests": [],
+  "connectorRequired": false,
+  "externalToolsAvailable": false,
+  "externalToolAutoTriggered": false,
+  "optionalPortAutoTriggered": false,
+  "writesPerformed": false,
+  "officialListingClaimed": false
+}

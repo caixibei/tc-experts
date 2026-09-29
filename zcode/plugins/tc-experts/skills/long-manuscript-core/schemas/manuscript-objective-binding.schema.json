@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/manuscript-objective-binding.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "projectId", "objective", "acceptanceCriteria", "projectStateDigest", "ownerRole", "status", "completionEvidenceDigests", "blockers", "persistenceClaim", "hostMutationAllowed", "externalActionCount", "bindingDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_objective_binding" },
+    "projectId": { "type": "string", "minLength": 1 },
+    "objective": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "acceptanceCriteria": { "$ref": "#/$defs/stringSet" },
+    "projectStateDigest": { "$ref": "#/$defs/sha256" },
+    "ownerRole": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["planned", "active", "blocked", "complete"] },
+    "completionEvidenceDigests": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/sha256" } },
+    "blockers": { "$ref": "#/$defs/stringSet" },
+    "persistenceClaim": { "const": "user_visible_object_only" },
+    "hostMutationAllowed": { "const": false },
+    "externalActionCount": { "const": 0 },
+    "bindingDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stringSet": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

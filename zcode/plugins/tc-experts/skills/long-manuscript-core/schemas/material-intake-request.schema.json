@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/material-intake-request.schema.json",
+  "title": "WorkBuddy structured dirty-material intake request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "requestId", "host", "modelDeclaration", "items", "expertUse"],
+  "properties": {
+    "schemaVersion": { "const": "manuscriptos.material-intake-request/v1" },
+    "requestId": { "type": "string", "minLength": 1 },
+    "host": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["product", "version", "versionEvidence", "instanceId", "observedAt"],
+      "properties": {
+        "product": { "const": "WorkBuddy" },
+        "version": { "type": ["string", "null"] },
+        "versionEvidence": { "enum": ["current_host_observed", "target_baseline", "not_observed"] },
+        "instanceId": { "type": ["string", "null"] },
+        "observedAt": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "modelDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "providerId", "modelId", "displayLabel", "declaredModalities"],
+      "properties": {
+        "state": { "enum": ["not_observed", "model_badge_only", "provider_declaration", "workbuddy_catalog_observed"] },
+        "providerId": { "type": ["string", "null"] },
+        "modelId": { "type": ["string", "null"] },
+        "displayLabel": { "type": ["string", "null"] },
+        "declaredModalities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/modality" }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lowConfidenceThreshold": { "type": "number", "minimum": 0, "maximum": 1, "default": 0.7 },
+        "stopOnUnknown": { "type": "boolean", "default": true },
+        "sourceRefDisclosure": { "enum": ["opaque_digest", "as_supplied"], "default": "opaque_digest" },
+        "byteBudget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["maxTotalDeclaredBytes", "maxInlineBytes", "maxBatchBytes"],
+          "properties": {
+            "maxTotalDeclaredBytes": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+            "maxInlineBytes": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+            "maxBatchBytes": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 }
+          }
+        }
+      }
+    },
+    "capacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["declaredBytes", "inlineBytes", "contentRefCount"],
+      "properties": {
+        "declaredBytes": { "$ref": "#/$defs/byteCount" },
+        "inlineBytes": { "$ref": "#/$defs/byteCount" },
+        "contentRefCount": { "$ref": "#/$defs/byteCount" }
+      }
+    },
+    "batch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxBatchBytes", "nextBatchIndex", "checkpointDigest", "resumeFromCheckpoint"],
+      "properties": {
+        "maxBatchBytes": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "nextBatchIndex": { "$ref": "#/$defs/byteCount" },
+        "checkpointDigest": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/sha256" }] },
+        "resumeFromCheckpoint": { "type": "boolean" },
+        "chunkDigestRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sourceRef", "ordinal", "digest"],
+            "properties": {
+              "sourceRef": { "type": "string", "minLength": 1, "maxLength": 4096 },
+              "ordinal": { "type": "integer", "minimum": 1 },
+              "digest": { "$ref": "#/$defs/sha256" }
+            }
+          }
+        }
+      }
+    },
+    "flowControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxInFlightBatches", "requestedInFlightBatches", "maxBatchBytes"],
+      "properties": {
+        "maxInFlightBatches": { "type": "integer", "minimum": 1 },
+        "requestedInFlightBatches": { "type": "integer", "minimum": 1 },
+        "maxBatchBytes": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/item" }
+    },
+    "expertUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "expertId", "hostProduct", "hostInstanceId", "consumedObservationIds", "outputArtifactDigest"],
+      "properties": {
+        "state": { "enum": ["not_observed", "structured_receipt"] },
+        "expertId": { "type": ["string", "null"] },
+        "hostProduct": { "type": ["string", "null"] },
+        "hostInstanceId": { "type": ["string", "null"] },
+        "consumedObservationIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "outputArtifactDigest": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/sha256" }
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+    "byteCount": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "modality": { "enum": ["text", "pdf", "image", "table", "office", "audio", "video", "web"] },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": [
+            "whole_source",
+            "character_range",
+            "page_range",
+            "bbox",
+            "cell_range",
+            "paragraph_range",
+            "slide_range",
+            "time_range",
+            "frame_range",
+            "url_section"
+          ]
+        },
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 1 },
+        "startPage": { "type": "integer", "minimum": 1 },
+        "endPage": { "type": "integer", "minimum": 1 },
+        "bbox": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number", "minimum": 0 } },
+        "sheet": { "type": "string", "minLength": 1 },
+        "startCell": { "type": "string", "pattern": "^[A-Z]+[1-9][0-9]*$" },
+        "endCell": { "type": "string", "pattern": "^[A-Z]+[1-9][0-9]*$" },
+        "startSlide": { "type": "integer", "minimum": 1 },
+        "endSlide": { "type": "integer", "minimum": 1 },
+        "startMs": { "type": "integer", "minimum": 0 },
+        "endMs": { "type": "integer", "minimum": 1 },
+        "startFrame": { "type": "integer", "minimum": 0 },
+        "endFrame": { "type": "integer", "minimum": 1 },
+        "section": { "type": "string", "minLength": 1 }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "modality", "order", "source", "presentation", "observations"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "modality": { "$ref": "#/$defs/modality" },
+        "order": { "type": "integer", "minimum": 1 },
+        "materialRole": { "enum": ["content", "reference_style", "both_scoped", "control_instruction"] },
+        "useScope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["factUse", "styleUse", "instructionUse", "scopeRefs"],
+          "properties": {
+            "factUse": { "enum": ["allowed", "forbidden"] },
+            "styleUse": { "enum": ["allowed", "forbidden"] },
+            "instructionUse": { "enum": ["allowed", "forbidden"] },
+            "scopeRefs": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sourceRef", "scope", "inputDigest", "evidenceState", "originalReadOnly", "originalMutationAllowed", "originalMutationCount"],
+          "properties": {
+            "sourceRef": { "type": "string", "minLength": 1 },
+            "scope": { "$ref": "#/$defs/scope" },
+            "inputDigest": { "$ref": "#/$defs/sha256" },
+            "evidenceState": { "enum": ["bytes_observed", "derived_artifact_observed", "digest_supplied_not_observed", "descriptor_only"] },
+            "declaredBytes": { "$ref": "#/$defs/byteCount" },
+            "contentRef": { "type": ["string", "null"], "maxLength": 4096 },
+            "inventoryState": { "enum": ["metadata_observed", "hash_pending", "hash_complete"] },
+            "hashMode": { "enum": ["metadata_only", "streaming", "incremental", "complete"] },
+            "hashedBytes": { "$ref": "#/$defs/byteCount" },
+            "originalReadOnly": { "const": true },
+            "originalMutationAllowed": { "const": false },
+            "originalMutationCount": { "const": 0 }
+          }
+        },
+        "presentation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "hostProduct", "hostInstanceId"],
+          "properties": {
+            "state": { "enum": ["not_observed", "attachment_card_observed", "content_surface_observed", "inline_content_received", "current_host_derived_artifact_received"] },
+            "hostProduct": { "type": ["string", "null"] },
+            "hostInstanceId": { "type": ["string", "null"] }
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": { "$ref": "material-observation.schema.json" }
+        }
+      }
+    }
+  }
+}

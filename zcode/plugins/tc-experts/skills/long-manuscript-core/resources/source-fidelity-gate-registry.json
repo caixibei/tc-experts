@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_source_fidelity_gate_registry",
+  "implementationDigestAlgorithm": "sha256_utf8_lf_v1",
+  "hostMutationAllowed": false,
+  "entries": [
+    {
+      "gateId": "page-sequence.integrity",
+      "lifecycle": "active",
+      "appliesTo": [
+        "source_transcription",
+        "review_quality:transcription_comparison"
+      ],
+      "implementationRef": "../scripts/source-fidelity/runtime.mjs",
+      "implementationDigestAlgorithm": "sha256_utf8_lf_v1",
+      "implementationSha256": "0c10361d03287baf41e003961e3a7fbd73a2286cda32fe13b08f5cce3220eda3",
+      "failureEffect": "block"
+    },
+    {
+      "gateId": "transcription.fidelity",
+      "lifecycle": "active",
+      "appliesTo": [
+        "source_transcription",
+        "review_quality:transcription_comparison"
+      ],
+      "implementationRef": "../scripts/source-fidelity/runtime.mjs",
+      "implementationDigestAlgorithm": "sha256_utf8_lf_v1",
+      "implementationSha256": "0c10361d03287baf41e003961e3a7fbd73a2286cda32fe13b08f5cce3220eda3",
+      "failureEffect": "human_or_block"
+    },
+    {
+      "gateId": "ocr-artifact.suspect",
+      "lifecycle": "active",
+      "appliesTo": [
+        "source_transcription",
+        "review_quality:transcription_comparison"
+      ],
+      "implementationRef": "../scripts/source-fidelity/runtime.mjs",
+      "implementationDigestAlgorithm": "sha256_utf8_lf_v1",
+      "implementationSha256": "0c10361d03287baf41e003961e3a7fbd73a2286cda32fe13b08f5cce3220eda3",
+      "failureEffect": "human_or_block"
+    }
+  ],
+  "entryCount": 3
+}

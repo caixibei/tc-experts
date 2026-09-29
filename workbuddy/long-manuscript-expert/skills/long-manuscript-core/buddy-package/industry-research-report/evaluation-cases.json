@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "fbs.industry-research-evaluation/v1",
+  "cases": [
+    {
+      "id": "ir-local-pdf-table-001",
+      "input": ["local_pdf", "local_text", "local_table"],
+      "expected": ["first_value", "page_or_cell_anchor", "time_anchor_status", "new_version_writeback"],
+      "mustNotClaim": ["web_verified_without_web_receipt", "all_materials_read_without_scope_receipt"]
+    },
+    {
+      "id": "ir-conflicted-sources-001",
+      "input": ["two_conflicting_reports"],
+      "expected": ["conflict_preserved", "human_review_pending"],
+      "mustBlock": ["silent_source_adjudication"]
+    },
+    {
+      "id": "ir-connector-failure-001",
+      "input": ["local_materials", "connector_http_success_business_failure"],
+      "expected": ["local_degraded_first_value", "business_failure_receipt"],
+      "mustNotClaim": ["connector_success"]
+    },
+    {
+      "id": "ir-low-confidence-number-001",
+      "input": ["blurred_scan_with_critical_number"],
+      "expected": ["low_confidence_stop", "human_review_required"],
+      "mustBlock": ["critical_number_as_confirmed_fact"]
+    }
+  ]
+}

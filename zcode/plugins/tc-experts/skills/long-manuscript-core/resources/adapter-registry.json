@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "fbs.adapter-registry/v1",
+  "runtimeRef": "../scripts/material-intake/runtime.mjs",
+  "developmentTarget": {
+    "product": "WorkBuddy",
+    "version": "5.5.3",
+    "role": "integration_target_not_capability_allowlist"
+  },
+  "hostPolicy": {
+    "acceptedProduct": "WorkBuddy",
+    "versionAdmission": "evidence_bound_not_version_whitelisted",
+    "siblingHostBackfillAllowed": false
+  },
+  "capacityPolicy": {
+    "controlEnvelopeMaxBytes": 4194304,
+    "payloadMode": "content_ref_digest_declared_bytes",
+    "inlineBase64Allowed": false,
+    "rawLargeContentRetained": false,
+    "batchPlanning": "deterministic_offset_length_chunks",
+    "checkpointHashRule": "chunk_manifest_or_full_restart",
+    "flowControl": "bounded_in_flight_backpressure"
+  },
+  "adapters": [
+    {
+      "id": "text",
+      "modality": "text",
+      "status": "structured_observation_intake",
+      "stages": ["read"],
+      "anchors": ["character_range"]
+    },
+    {
+      "id": "pdf_text",
+      "modality": "pdf",
+      "status": "structured_observation_intake",
+      "stages": ["read", "parse", "ocr"],
+      "anchors": ["character_range", "page", "page_bbox"]
+    },
+    {
+      "id": "scanned_page",
+      "modality": "pdf",
+      "aliasOf": "pdf_text",
+      "status": "structured_observation_intake",
+      "stages": ["ocr"],
+      "anchors": ["page_bbox"]
+    },
+    {
+      "id": "image_observation",
+      "modality": "image",
+      "status": "structured_observation_intake",
+      "stages": ["ocr", "visual_observation"],
+      "anchors": ["bbox"]
+    },
+    {
+      "id": "table",
+      "modality": "table",
+      "status": "structured_observation_intake",
+      "stages": ["parse", "cell_read"],
+      "anchors": ["cell_range"]
+    },
+    {
+      "id": "office_route",
+      "modality": "office",
+      "status": "structured_observation_intake",
+      "stages": ["parse", "paragraph_read", "cell_read", "slide_observation"],
+      "anchors": ["paragraph_range", "cell_range", "slide"]
+    },
+    {
+      "id": "audio",
+      "modality": "audio",
+      "status": "current_host_derived_artifact_required",
+      "stages": ["asr"],
+      "anchors": ["time_range"],
+      "degradeWhen": "artifact_not_bound_to_current_workbuddy_host"
+    },
+    {
+      "id": "video",
+      "modality": "video",
+      "status": "current_host_derived_artifact_required",
+      "stages": ["asr", "keyframe_extract", "visual_observation"],
+      "anchors": ["time_range", "frame_range", "frame_bbox"],
+      "degradeWhen": "artifact_not_bound_to_current_workbuddy_host"
+    },
+    {
+      "id": "web",
+      "modality": "web",
+      "status": "structured_observation_intake_no_fetch",
+      "stages": ["snapshot", "read", "parse"],
+      "anchors": ["character_range", "url_section"]
+    }
+  ],
+  "evidenceLayers": [
+    "model_declaration",
+    "attachment_presentation",
+    "content_observation",
+    "expert_use"
+  ],
+  "materialRoles": ["content", "reference_style", "both_scoped", "control_instruction"],
+  "maturityLevels": ["L0", "L1", "L2", "L3", "L4", "L5"],
+  "policy": "Adapter registration never implies execution. A model badge or attachment card alone remains not_observed. The runtime consumes caller-supplied structured observations, performs no host or network action, and never mutates originals."
+}

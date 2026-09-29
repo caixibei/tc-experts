@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.artifact-manifest-entry/v1",
+  "title": "Artifact Manifest Entry",
+  "type": "object",
+  "required": ["artifactId", "artifactType", "sourceOrDerived", "sha256", "version", "status"],
+  "properties": {
+    "artifactId": {"type": "string", "minLength": 1},
+    "artifactType": {"type": "string", "minLength": 1},
+    "sourceOrDerived": {"enum": ["source", "derived", "draft", "patch", "delivery"]},
+    "pathOrExternalRef": {"type": ["string", "null"]},
+    "sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+    "size": {"type": ["integer", "null"], "minimum": 0},
+    "mimeType": {"type": ["string", "null"]},
+    "parentArtifactIds": {"type": "array", "items": {"type": "string"}},
+    "version": {"type": "string", "minLength": 1},
+    "createdBy": {"type": "string", "minLength": 1},
+    "status": {"enum": ["discovered", "frozen", "available", "partial", "failed", "quarantined", "accepted"]},
+    "sensitivity": {"enum": ["unknown", "ordinary", "restricted", "private", "high_risk"]}
+  },
+  "additionalProperties": false
+}

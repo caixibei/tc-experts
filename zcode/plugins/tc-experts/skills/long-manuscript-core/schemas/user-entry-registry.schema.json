@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/user-entry-registry.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "productId", "targetVersion", "defaultEntryId", "quickPromptCount", "entryCount", "declaredProductShape", "publicEvidencePolicy", "entries"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_user_entry_registry" },
+    "productId": { "const": "long-manuscript-expert" },
+    "targetVersion": { "const": "26.9.10" },
+    "defaultEntryId": { "const": "material_start" },
+    "quickPromptCount": { "const": 3 },
+    "entryCount": { "const": 5 },
+    "declaredProductShape": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sceneCount", "sharedCapabilityCount", "operationModeCount", "durableObjectCount", "atomicVerbCount", "machineGateCount", "sourceFidelityGateCount", "optionalPortCount"],
+      "properties": {
+        "sceneCount": { "const": 21 }, "sharedCapabilityCount": { "const": 23 }, "operationModeCount": { "const": 11 }, "durableObjectCount": { "const": 31 },
+        "atomicVerbCount": { "const": 19 }, "machineGateCount": { "const": 32 }, "sourceFidelityGateCount": { "const": 3 }, "optionalPortCount": { "const": 8 }
+      }
+    },
+    "publicEvidencePolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["machineClaimWithoutCurrentReceipt", "currentReceiptRequired", "officialListingClaimAllowed", "hostValidationClaimAllowedWithoutReceipt", "externalActionClaimAllowedWithoutReceipt"],
+      "properties": {
+        "machineClaimWithoutCurrentReceipt": { "const": "advisory" }, "currentReceiptRequired": { "const": true }, "officialListingClaimAllowed": { "const": false },
+        "hostValidationClaimAllowedWithoutReceipt": { "const": false }, "externalActionClaimAllowedWithoutReceipt": { "const": false }
+      }
+    },
+    "entries": {
+      "type": "array", "minItems": 5, "maxItems": 5,
+      "items": { "$ref": "#/$defs/entry" },
+      "allOf": [
+        { "contains": { "properties": { "entryId": { "const": "material_start" } }, "required": ["entryId"] }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "entryId": { "const": "source_transcription" } }, "required": ["entryId"] }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "entryId": { "const": "project_resume" }, "requiredDurableObjects": { "allOf": [{ "contains": { "const": "ContinuationCapsule" } }, { "contains": { "const": "ProjectStatus" } }, { "contains": { "const": "ChapterCheckpoint" } }, { "contains": { "const": "FactDelta" } }] } }, "required": ["entryId", "requiredDurableObjects"] }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "entryId": { "const": "bounded_revision" } }, "required": ["entryId"] }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "entryId": { "const": "finished_draft_closure" } }, "required": ["entryId"] }, "minContains": 1, "maxContains": 1 }
+      ]
+    }
+  },
+  "$defs": {
+    "i18n": { "type": "object", "additionalProperties": false, "required": ["en", "zh"], "properties": { "en": { "type": "string", "minLength": 1 }, "zh": { "type": "string", "minLength": 1 } } },
+    "stringSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "firstValueContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["inFirstReply", "editableStructure", "substantiveText", "singleNextStep", "maximumBlockingQuestionCount"],
+      "properties": {
+        "inFirstReply": { "const": true },
+        "editableStructure": { "type": "object", "additionalProperties": false, "required": ["required", "examples"], "properties": { "required": { "const": true }, "examples": { "$ref": "#/$defs/stringSet" } } },
+        "substantiveText": { "type": "object", "additionalProperties": false, "required": ["required", "minimumParagraphs", "placeholderOnlyAllowed"], "properties": { "required": { "const": true }, "minimumParagraphs": { "type": "integer", "minimum": 1 }, "placeholderOnlyAllowed": { "const": false } } },
+        "singleNextStep": { "type": "object", "additionalProperties": false, "required": ["required", "exactlyOne"], "properties": { "required": { "const": true }, "exactlyOne": { "const": true } } },
+        "maximumBlockingQuestionCount": { "type": "integer", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "entry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["entryId", "lifecycle", "operationMode", "quickPromptOrdinals", "displayName", "entrySignals", "requiredInputs", "firstValueContract", "requiredDurableObjects", "continuationHook", "connectorRequired", "externalToolsAvailableSemantics", "externalToolAutoTriggerAllowed", "optionalPortAutoTriggerAllowed", "machineClaimWithoutCurrentReceipt", "forbiddenClaims"],
+      "properties": {
+        "entryId": { "enum": ["material_start", "source_transcription", "project_resume", "bounded_revision", "finished_draft_closure"] },
+        "lifecycle": { "const": "active" }, "operationMode": { "enum": ["material_activation", "source_transcription", "continuation", "bounded_revision", "finished_draft_closure"] },
+        "quickPromptOrdinals": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 1, "maximum": 3 } },
+        "displayName": { "$ref": "#/$defs/i18n" }, "entrySignals": { "$ref": "#/$defs/stringSet" }, "requiredInputs": { "$ref": "#/$defs/stringSet" },
+        "firstValueContract": { "$ref": "#/$defs/firstValueContract" }, "requiredDurableObjects": { "$ref": "#/$defs/stringSet" },
+        "continuationHook": { "type": "object", "additionalProperties": false, "required": ["nextEntryId", "cta"], "properties": { "nextEntryId": { "enum": ["material_start", "source_transcription", "project_resume", "bounded_revision", "finished_draft_closure"] }, "cta": { "type": "string", "minLength": 1 } } },
+        "connectorRequired": { "const": false }, "externalToolsAvailableSemantics": { "const": "declaration_only" }, "externalToolAutoTriggerAllowed": { "const": false }, "optionalPortAutoTriggerAllowed": { "const": false },
+        "machineClaimWithoutCurrentReceipt": { "const": "advisory" }, "forbiddenClaims": { "$ref": "#/$defs/stringSet" }
+      }
+    }
+  }
+}

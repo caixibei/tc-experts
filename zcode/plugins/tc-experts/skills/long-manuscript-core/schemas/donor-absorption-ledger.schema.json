@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.donor-absorption-ledger/v1",
+  "title": "Donor Absorption Ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "targetPackage", "targetVersion", "runtimeDependencyAllowed", "entries", "invariants"],
+  "properties": {
+    "schemaVersion": {"const": "fbs.donor-absorption-ledger/v1"},
+    "targetPackage": {"const": "long-manuscript-expert"},
+    "targetVersion": {"const": "26.9.10"},
+    "runtimeDependencyAllowed": {"const": false},
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["donorId", "observedVersion", "sourceClass", "mechanisms"],
+        "properties": {
+          "donorId": {"type": "string", "minLength": 1},
+          "observedVersion": {"type": "string", "minLength": 1},
+          "sourceClass": {"enum": ["listed_package_snapshot", "installed_skill_snapshot", "installed_connector_snapshot"]},
+          "mechanisms": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "status", "packageLocalAssets", "evidenceClass", "remainingGate"],
+              "properties": {
+                "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+                "status": {"enum": ["retained_baseline", "package_local_fixture_validated", "package_local_partial", "contract_only", "reference_only"]},
+                "packageLocalAssets": {"type": "array", "items": {"type": "string", "pattern": "^(references|resources|schemas|scripts|templates|buddy-package)/"}},
+                "evidenceClass": {"enum": ["static_asset", "offline_fixed_regression", "governance_fixture", "design_reference"]},
+                "remainingGate": {"type": "string", "minLength": 1}
+              }
+            }
+          }
+        }
+      }
+    },
+    "invariants": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.question-map/v1",
+  "title": "Evidence-driven Question Map",
+  "type": "object",
+  "required": ["questionId", "question", "reason", "status"],
+  "properties": {
+    "questionId": {"type": "string", "minLength": 1},
+    "question": {"type": "string", "minLength": 1},
+    "reason": {"enum": ["source_gap", "relationship_gap", "timeline_gap", "conflict", "user_goal"]},
+    "evidenceRefs": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["open", "answered", "skipped", "private", "withdrawn", "disputed"]},
+    "answerRef": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

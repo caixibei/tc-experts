@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.event-journal-entry/v2",
+  "title": "Hash-chained Event Journal Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "idempotencyKey",
+    "projectId",
+    "action",
+    "actor",
+    "inputDigests",
+    "outputDigests",
+    "startedAt",
+    "completedAt",
+    "status",
+    "error",
+    "receiptRef",
+    "previousHash",
+    "currentReceipt",
+    "entryHashAlgorithm",
+    "entryHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "fbs.event-journal-entry/v2"},
+    "eventId": {"type": "string", "format": "uuid", "maxLength": 128},
+    "idempotencyKey": {"type": "string", "minLength": 1, "maxLength": 256},
+    "projectId": {"type": "string", "minLength": 1, "maxLength": 256},
+    "action": {"type": "string", "minLength": 1, "maxLength": 256},
+    "actor": {"type": "string", "minLength": 1, "maxLength": 256},
+    "inputDigests": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "outputDigests": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "startedAt": {"type": "string", "format": "date-time"},
+    "completedAt": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["started", "completed", "partial", "failed", "blocked", "degraded"]},
+    "error": {"type": ["string", "null"], "maxLength": 4096},
+    "receiptRef": {"type": ["string", "null"], "maxLength": 4096},
+    "previousHash": {
+      "anyOf": [
+        {"type": "null"},
+        {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      ]
+    },
+    "currentReceipt": {"const": true},
+    "entryHashAlgorithm": {"const": "sha256_canonical_json_without_entry_hash_v1"},
+    "entryHash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

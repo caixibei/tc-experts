@@ -1,0 +1,43 @@
+{
+  "name": "fullstack-dev",
+  "version": "1.0.0",
+  "description": "Full-stack development expert covering architecture design, layered engineering, database access, authentication, frontend-backend integration, real-time features and production hardening. Delivers robust, production-ready full-stack applications end to end.",
+  "author": { "name": "鹏城信息AI专家", "email": "zhangyinlai@lcyqchina.com" },
+  "agents": [
+    "./agents/fullstack-dev.md"
+  ],
+  "expertType": "agent",
+  "agentName": "fullstack-dev",
+  "displayName": {
+    "en": "PCXX AI Expert",
+    "zh": "鹏城信息AI专家"
+  },
+  "profession": {
+    "en": "Full-Stack Development Expert",
+    "zh": "全栈开发专家"
+  },
+  "displayDescription": {
+    "en": "Full-stack development expert skilled in architecture design, layered engineering, database access, authentication, frontend-backend integration, real-time features and production hardening. Builds robust, production-ready applications end to end.",
+    "zh": "全栈开发专家，精通前后端架构与接口集成，覆盖需求澄清、代码实现、测试验证到生产加固，一站式交付。"
+  },
+  "avatar": "avatars/fullstack-dev.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Build a full-stack app with backend, frontend and database",
+    "zh": "帮我构建一个包含后端、前端和数据库的全栈应用"
+  },
+  "plugin": "fullstack-dev",
+  "tags": [
+    { "en": "Full-Stack Development", "zh": "全栈开发" },
+    { "en": "Backend Architecture", "zh": "后端架构" },
+    { "en": "API Integration", "zh": "接口集成" }
+  ],
+  "quickPrompts": [
+    { "en": "Build a full-stack app with backend, frontend and database",
+      "zh": "帮我构建一个包含后端、前端和数据库的全栈应用" },
+    { "en": "Design and implement a REST API with user authentication",
+      "zh": "设计并实现一个带用户认证的 REST API" },
+    { "en": "Add real-time push notifications (SSE or WebSocket) to my app",
+      "zh": "为我的应用添加实时推送功能（SSE或WebSocket）" }
+  ]
+}

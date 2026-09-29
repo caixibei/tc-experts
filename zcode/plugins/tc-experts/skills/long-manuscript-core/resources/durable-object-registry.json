@@ -1,0 +1,193 @@
+{
+  "artifactType": "manuscriptos_durable_object_registry",
+  "entries": [
+    {
+      "id": "ManuscriptProject",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/manuscript-project.schema.json"
+    },
+    {
+      "id": "MaterialItem",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/material-item.schema.json"
+    },
+    {
+      "id": "SourceLedger",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/source-ledger.schema.json"
+    },
+    {
+      "id": "ClaimGraph",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/claim-graph.schema.json"
+    },
+    {
+      "id": "EntityTimeline",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/entity-timeline.schema.json"
+    },
+    {
+      "id": "ScopeLock",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/scope-lock.schema.json"
+    },
+    {
+      "id": "ChapterPlan",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/chapter-plan.schema.json"
+    },
+    {
+      "id": "ReviewCycle",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/review-cycle.schema.json"
+    },
+    {
+      "id": "DeliveryManifest",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/delivery-manifest.schema.json"
+    },
+    {
+      "id": "ContinuationCapsule",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/continuation-capsule.schema.json"
+    },
+    {
+      "id": "MediaPlan",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/media-plan.schema.json"
+    },
+    {
+      "id": "CapabilityReceipt",
+      "implementationCheckpoint": "C2",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/capability-receipt.schema.json"
+    },
+    {
+      "id": "ManuscriptObjectiveBinding",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/manuscript-objective-binding.schema.json"
+    },
+    {
+      "id": "CapabilitySnapshot",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/capability-snapshot.schema.json"
+    },
+    {
+      "id": "ArtifactProvenance",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/artifact-provenance.schema.json"
+    },
+    {
+      "id": "ProjectStatus",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/project-status.schema.json"
+    },
+    {
+      "id": "ChapterCheckpoint",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/chapter-checkpoint.schema.json"
+    },
+    {
+      "id": "FactDelta",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/fact-delta.schema.json"
+    },
+    {
+      "id": "ReviewBrief",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/review-brief.schema.json"
+    },
+    {
+      "id": "DerivedArtifactPlan",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/derived-artifact-plan.schema.json"
+    },
+    {
+      "id": "WorkspaceTransactionPlan",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/workspace-transaction-plan.schema.json"
+    },
+    {
+      "id": "WorkspaceTransactionReceipt",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/workspace-transaction-receipt.schema.json"
+    },
+    {
+      "id": "PageManifest",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/page-manifest.schema.json"
+    },
+    {
+      "id": "OcrObservation",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/ocr-observation.schema.json"
+    },
+    {
+      "id": "TranscriptSnapshot",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/transcript-snapshot.schema.json"
+    },
+    {
+      "id": "TranscriptionSampleValidation",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/transcription-sample-validation.schema.json"
+    },
+    {
+      "id": "TranscriptComparison",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/transcript-comparison.schema.json"
+    },
+    {
+      "id": "TranscriptionIssue",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/transcription-issue.schema.json"
+    },
+    {
+      "id": "TranscriptAdjudication",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/transcript-adjudication.schema.json"
+    },
+    {
+      "id": "TranscriptionPatchSet",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/transcription-patch-set.schema.json"
+    },
+    {
+      "id": "SourceFidelityStatus",
+      "implementationCheckpoint": "C13",
+      "lifecycle": "active",
+      "schemaRef": "../schemas/source-fidelity-status.schema.json"
+    }
+  ],
+  "entryCount": 31,
+  "schemaVersion": "1.0.0"
+}

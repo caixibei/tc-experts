@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.data-egress-policy/v1",
+  "title": "Data Egress Policy",
+  "type": "object",
+  "required": ["scope", "purpose", "recipient", "authorization", "mode"],
+  "properties": {
+    "scope": {"type": "array", "items": {"type": "string"}},
+    "purpose": {"type": "string", "minLength": 1},
+    "recipient": {"type": "string", "minLength": 1},
+    "authorization": {"enum": ["not_needed", "current_user_request", "explicit_confirmation", "blocked"]},
+    "mode": {"enum": ["local", "local_with_remote_model", "connector_enhanced", "online_optional", "degraded", "unsupported"]},
+    "redaction": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["proposed", "approved", "executed", "blocked", "failed"]}
+  },
+  "additionalProperties": false
+}

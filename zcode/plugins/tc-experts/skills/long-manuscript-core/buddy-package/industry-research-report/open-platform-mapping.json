@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "fbs.workbuddy-open-platform-mapping/v1",
+  "mappingState": "proposal_only_not_open_platform_uploaded",
+  "targetSurface": "WorkBuddy Buddy application",
+  "sourcePackageId": "industry-research-report",
+  "hostProduct": "WorkBuddy",
+  "targetHostVersion": "5.5.3",
+  "officialModules": {
+    "applicationIdentity": {
+      "status": "design_candidate",
+      "requiredDecisions": [
+        "applicationId",
+        "icon",
+        "nameAndDescription",
+        "oauthScopes",
+        "callbackUrls",
+        "trustedOrigins"
+      ]
+    },
+    "home": {
+      "status": "design_candidate",
+      "recommendedWorkModeCount": {
+        "minimum": 2,
+        "maximum": 4
+      },
+      "sceneCapsules": [
+        "absorb_mixed_local_materials",
+        "draft_evidence_backed_industry_report",
+        "review_and_update_existing_report"
+      ],
+      "connectorPolicy": "optional_nonblocking"
+    },
+    "market": {
+      "status": "identity_binding_pending",
+      "expertIds": [
+        "long-manuscript-expert"
+      ],
+      "skillIds": [
+        "long-manuscript-core"
+      ],
+      "connectorIds": []
+    },
+    "models": {
+      "status": "current_workflow_fit_not_proven",
+      "selectionPolicy": "choose_from_current_workbuddy_catalog_after_fixture_receipts",
+      "hardcodedDefaultModel": null
+    },
+    "previewAndReview": {
+      "status": "not_executed",
+      "requiredGates": [
+        "local_config_preview",
+        "workbuddy_material_intake_fixture",
+        "permission_and_degradation_fixture",
+        "artifact_delivery_fixture",
+        "human_product_review"
+      ]
+    }
+  },
+  "forbiddenClaims": [
+    "official_upload_format",
+    "platform_draft_created",
+    "review_submitted",
+    "review_accepted",
+    "published"
+  ]
+}

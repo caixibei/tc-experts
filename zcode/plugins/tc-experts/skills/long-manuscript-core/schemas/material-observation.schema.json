@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/material-observation.schema.json",
+  "title": "Structured dirty-material observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "stage",
+    "state",
+    "sourceInputDigest",
+    "processor",
+    "anchor",
+    "confidence",
+    "unknowns",
+    "content"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "stage": {
+      "enum": [
+        "read",
+        "parse",
+        "ocr",
+        "visual_observation",
+        "cell_read",
+        "paragraph_read",
+        "slide_observation",
+        "asr",
+        "keyframe_extract",
+        "snapshot"
+      ]
+    },
+    "state": { "enum": ["observed", "partial", "not_observed", "failed"] },
+    "sourceInputDigest": { "$ref": "#/$defs/sha256" },
+    "processor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["read", "parser", "ocr", "vision", "asr", "keyframe_extractor"] }
+      }
+    },
+    "anchor": { "$ref": "#/$defs/anchor" },
+    "confidence": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["extraction", "alignment", "identity"],
+          "properties": {
+            "extraction": { "$ref": "#/$defs/unitInterval" },
+            "alignment": { "$ref": "#/$defs/unitInterval" },
+            "identity": { "$ref": "#/$defs/unitInterval" }
+          }
+        }
+      ]
+    },
+    "unknowns": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "content": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/contentEnvelope" }
+      ]
+    },
+    "expectedObservationDigest": { "$ref": "#/$defs/sha256" },
+    "derivedArtifact": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["origin", "hostProduct", "hostVersion", "hostInstanceId", "artifactDigest"],
+          "properties": {
+            "origin": { "const": "workbuddy_current_host" },
+            "hostProduct": { "const": "WorkBuddy" },
+            "hostVersion": { "type": "string", "minLength": 1 },
+            "hostInstanceId": { "type": "string", "minLength": 1 },
+            "artifactDigest": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "state": { "enum": ["observed", "partial"] } }, "required": ["state"] },
+      "then": {
+        "properties": {
+          "confidence": { "type": "object" },
+          "content": { "$ref": "#/$defs/contentEnvelope" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "state": { "enum": ["not_observed", "failed"] } }, "required": ["state"] },
+      "then": {
+        "properties": {
+          "confidence": { "type": "null" },
+          "content": { "type": "null" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+    "unitInterval": { "type": "number", "minimum": 0, "maximum": 1 },
+    "byteCount": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "contentEnvelope": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "cells": { "type": "array" },
+        "contentRef": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "digest": { "$ref": "#/$defs/sha256" },
+        "declaredBytes": { "$ref": "#/$defs/byteCount" },
+        "inlineBytes": { "$ref": "#/$defs/byteCount" },
+        "coveredBytes": { "$ref": "#/$defs/byteCount" },
+        "residualBytes": { "$ref": "#/$defs/byteCount" },
+        "encoding": { "type": "string", "minLength": 1 },
+        "data": { "type": "string", "minLength": 1 },
+        "pageCount": { "$ref": "#/$defs/byteCount" },
+        "durationMs": { "$ref": "#/$defs/byteCount" },
+        "frameCount": { "$ref": "#/$defs/byteCount" }
+      }
+    },
+    "bbox": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number", "minimum": 0 },
+        { "type": "number", "minimum": 0 },
+        { "type": "number", "exclusiveMinimum": 0 },
+        { "type": "number", "exclusiveMinimum": 0 }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "anchor": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "reason"],
+          "properties": {
+            "type": { "const": "bbox_unavailable" },
+            "reason": { "type": "string", "minLength": 1, "maxLength": 512 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "start", "end"],
+          "properties": {
+            "type": { "enum": ["character_range", "paragraph_range"] },
+            "start": { "type": "integer", "minimum": 0 },
+            "end": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "page"],
+          "properties": {
+            "type": { "const": "page" },
+            "page": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "page", "bbox"],
+          "properties": {
+            "type": { "const": "page_bbox" },
+            "page": { "type": "integer", "minimum": 1 },
+            "bbox": { "$ref": "#/$defs/bbox" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "bbox"],
+          "properties": {
+            "type": { "const": "bbox" },
+            "bbox": { "$ref": "#/$defs/bbox" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "sheet", "startCell", "endCell"],
+          "properties": {
+            "type": { "const": "cell_range" },
+            "sheet": { "type": "string", "minLength": 1 },
+            "startCell": { "type": "string", "pattern": "^[A-Z]+[1-9][0-9]*$" },
+            "endCell": { "type": "string", "pattern": "^[A-Z]+[1-9][0-9]*$" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "slide"],
+          "properties": {
+            "type": { "const": "slide" },
+            "slide": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "startMs", "endMs"],
+          "properties": {
+            "type": { "const": "time_range" },
+            "startMs": { "type": "integer", "minimum": 0 },
+            "endMs": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "startFrame", "endFrame"],
+          "properties": {
+            "type": { "const": "frame_range" },
+            "startFrame": { "type": "integer", "minimum": 0 },
+            "endFrame": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "frame", "bbox"],
+          "properties": {
+            "type": { "const": "frame_bbox" },
+            "frame": { "type": "integer", "minimum": 0 },
+            "bbox": { "$ref": "#/$defs/bbox" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "section"],
+          "properties": {
+            "type": { "const": "url_section" },
+            "section": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    }
+  }
+}

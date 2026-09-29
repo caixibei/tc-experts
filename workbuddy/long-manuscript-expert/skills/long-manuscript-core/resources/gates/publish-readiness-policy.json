@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "fbs.publish-readiness-policy/v1",
+  "draftMode": "advisory",
+  "releaseMode": "fail_closed",
+  "blockedWhen": [
+    "privacy_conflict",
+    "rights_unclear",
+    "critical_claim_without_anchor",
+    "low_confidence_fact_in_release_scope",
+    "writeback_not_read_back",
+    "missing_current_receipt",
+    "connector_business_failure",
+    "unresolved_source_conflict"
+  ],
+  "statuses": ["advisory", "machine_receipt_present", "human_review_pending", "blocked"],
+  "invariants": [
+    "Historical or development receipts cannot close a current release gate.",
+    "A release-ready state does not imply publication or business success.",
+    "Human review remains required for high-risk claims, privacy, rights, and final publication."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/workspace-transaction-receipt.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "transactionId", "planDigest", "status", "plannedTargetDigests", "createdTargets", "executionPerformed", "hostMutationCount", "externalActionCount", "issues", "receiptDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_workspace_transaction_receipt" },
+    "transactionId": { "type": "string" },
+    "planDigest": { "$ref": "#/$defs/sha256" },
+    "status": { "enum": ["validated", "rejected"] },
+    "plannedTargetDigests": { "type": "object", "additionalProperties": { "$ref": "#/$defs/sha256" } },
+    "createdTargets": { "type": "array", "maxItems": 0 },
+    "executionPerformed": { "const": false },
+    "hostMutationCount": { "const": 0 },
+    "externalActionCount": { "const": 0 },
+    "issues": { "$ref": "#/$defs/stringSet" },
+    "receiptDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stringSet": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/atomic-fixture.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "cases"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "enum": ["manuscriptos_atomic_fixture_bundle", "manuscriptos_atomic_semantic_fixture_bundle"] },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "input", "expectedStatus"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["atomic_verb", "capability_snapshot", "artifact_provenance", "objective_binding", "checkpoint", "fact_delta", "project_status", "review_brief", "derivation", "transaction"] },
+          "input": { "type": "object" },
+          "expectedStatus": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

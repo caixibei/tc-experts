@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.claim-evidence-link/v1",
+  "title": "Claim Evidence Link",
+  "type": "object",
+  "required": ["claimId", "claimText", "supportingAnchors", "supportState", "verificationState"],
+  "properties": {
+    "claimId": {"type": "string", "minLength": 1},
+    "claimText": {"type": "string", "minLength": 1},
+    "supportingAnchors": {"type": "array", "items": {"type": "string"}},
+    "contradictingAnchors": {"type": "array", "items": {"type": "string"}},
+    "supportState": {"enum": ["confirmed", "probable", "conflicted", "unknown", "refuted", "unsupported"]},
+    "supportConfidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "usedIn": {"type": "array", "items": {"type": "string"}},
+    "verificationState": {"enum": ["not_checked", "advisory", "machine_receipt_present", "human_review_pending", "blocked"]}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_workspace_transaction_plan",
+  "transactionId": "replace-transaction-id",
+  "writes": [
+    {
+      "relativePath": "artifacts/replace-output.md",
+      "mediaType": "text/markdown",
+      "byteLength": 0,
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "intent": "create_candidate"
+    }
+  ],
+  "targetPolicy": "plan_only_no_host_mutation",
+  "rollbackRequirement": "required_if_promoted_to_authorized_executor",
+  "status": "ready",
+  "issues": [],
+  "executionAllowed": false,
+  "hostMutationAllowed": false,
+  "writesPerformed": false,
+  "externalActionCount": 0,
+  "planDigest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

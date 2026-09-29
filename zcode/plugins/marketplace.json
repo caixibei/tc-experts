@@ -1,0 +1,20 @@
+{
+  "name": "dev-tc-experts",
+  "owner": { "name": "tc-experts dev" },
+  "meta": {
+    "displayName": "TC Experts Dev Market",
+    "displayName_i18n": { "zh-CN": "TC 专家集开发市场" }
+  },
+  "plugins": [
+    {
+      "name": "tc-experts",
+      "source": "./tc-experts",
+      "version": "0.1.0",
+      "description": "Expert collection converted from 13 CodeBuddy expert plugins: 17 domain experts plus their dedicated companion skills.",
+      "displayName": "TC Experts",
+      "displayName_i18n": { "zh-CN": "TC 专家集" },
+      "description_i18n": { "zh-CN": "来自 13 个 CodeBuddy 专家插件的 17 位领域专家（后端架构、嵌入式固件、全栈开发、长文写作、并购顾问、高级开发、软件架构、软件团队 SOP、UI 设计、网站开发、微信小程序、公众号运营、爆文写作）与其专属技能集合" },
+      "category": "developer-tools"
+    }
+  ]
+}

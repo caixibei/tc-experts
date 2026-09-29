@@ -1,0 +1,143 @@
+{
+  "artifactType": "manuscriptos_operation_registry",
+  "compositionPolicy": {
+    "auxiliaryCapabilityIds": [
+      "capability-preflight",
+      "project-control",
+      "review-briefing",
+      "artifact-derivation",
+      "rights-privacy-consent"
+    ],
+    "auxiliaryMutationAllowed": false,
+    "canonicalProseWriterCount": 1,
+    "multipleProseMutations": "sequence_under_primary_operation",
+    "primaryOperationModeCount": 1
+  },
+  "entries": [
+    {
+      "capabilityIds": [
+        "capability-preflight",
+        "material-activation",
+        "multimodal-normalizer"
+      ],
+      "id": "material_activation",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "capability-preflight",
+        "source-transcription",
+        "multimodal-normalizer"
+      ],
+      "id": "source_transcription",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "scene-router",
+        "scene-composer",
+        "chapter-planning-expansion",
+        "project-control"
+      ],
+      "id": "project_planning",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "chapter-planning-expansion",
+        "source-ledger-claim-graph",
+        "voice-profile-humanizer",
+        "project-control"
+      ],
+      "id": "chapter_generation",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "continuation-recovery",
+        "entity-timeline-continuity",
+        "project-control"
+      ],
+      "id": "continuation",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "scope-lock-diff",
+        "entity-timeline-continuity"
+      ],
+      "id": "bounded_revision",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "review-revise-quality-loop",
+        "rights-privacy-consent",
+        "research-verification",
+        "transcription-adjudication",
+        "review-briefing"
+      ],
+      "id": "review_quality",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active",
+      "submodes": [
+        {
+          "capabilityIds": [
+            "transcription-adjudication"
+          ],
+          "compareOnlyByDefault": true,
+          "id": "transcription_comparison",
+          "writesArtifactByDefault": false
+        }
+      ]
+    },
+    {
+      "capabilityIds": [
+        "review-revise-quality-loop",
+        "multi-format-rendering",
+        "review-briefing",
+        "project-control"
+      ],
+      "id": "finished_draft_closure",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "multi-format-rendering",
+        "scope-lock-diff"
+      ],
+      "id": "template_fill_conversion",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "multi-format-rendering",
+        "rights-privacy-consent",
+        "artifact-derivation"
+      ],
+      "id": "export_delivery",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    },
+    {
+      "capabilityIds": [
+        "asset-repurposing",
+        "media-illustration-planning",
+        "artifact-derivation"
+      ],
+      "id": "asset_repurposing",
+      "implementationRef": "../scripts/manuscript-kernel.mjs",
+      "lifecycle": "active"
+    }
+  ],
+  "entryCount": 11,
+  "schemaVersion": "1.1.0"
+}

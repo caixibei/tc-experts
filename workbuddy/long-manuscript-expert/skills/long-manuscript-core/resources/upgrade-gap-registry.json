@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "fbs.upgrade-gap-registry/v2",
+  "target": "full_upgrade_of_long_manuscript_expert_and_fbs_bookwriter_governance",
+  "hostProduct": "WorkBuddy",
+  "releaseStatus": "rc8_candidate_and_readback_passed_scope_and_projection_failed_rc9_pending",
+  "p0": [
+    {
+      "id": "P0-SOURCE-PROSE",
+      "gap": "uncertain source tokens and session dates must not be promoted into factual prose",
+      "status": "package_local_gate_and_entry_policy_added_host_blind_retest_pending"
+    },
+    {
+      "id": "P0-METADATA-CARDINALITY",
+      "gap": "bound chunk counts before allocation and bound final receipt size",
+      "status": "1024_chunk_cap_4mib_output_cap_negative_tests_passed"
+    },
+    {
+      "id": "P0-STAGE-GATES",
+      "gap": "S0-S6 and S3.5/S3.7 transitions require physical current receipts and protected gates",
+      "status": "package_local_fixture_validated_real_project_pending"
+    },
+    {
+      "id": "P0-MATERIAL-RUNTIME",
+      "gap": "mixed-material observations require exact WorkBuddy presentation, parsing and expert-use receipts",
+      "status": "package_local_runtime_and_fixtures_passed_host_pending"
+    },
+    {
+      "id": "P0-GB-SCALE",
+      "gap": "multi-gigabyte collections require bounded references, byte budgets, batches, checkpoints, backpressure and conserved residual coverage",
+      "status": "five_gib_contract_and_standalone_stream_hash_passed_host_semantic_throughput_and_crash_recovery_pending"
+    },
+    {
+      "id": "P0-WRITEBACK",
+      "gap": "new-version writeback and physical read-back require a current authorized WorkBuddy execution receipt",
+      "status": "rc3_single_file_write_readback_passed_successor_host_retest_pending"
+    },
+    {
+      "id": "P0-LEDGERS",
+      "gap": "Artifact Manifest, Provenance Graph and Event Journal must remain mutually reconstructable",
+      "status": "event_hash_chain_fixture_passed_full_three_ledger_rebuild_pending"
+    },
+    {
+      "id": "P0-SELF-CONTAINED",
+      "gap": "all executable dependencies must resolve inside the public package with zero donor runtime lookup",
+      "status": "source_verify_passed_package_readback_pending"
+    },
+    {
+      "id": "P0-REGRESSION",
+      "gap": "fixed offline regression must not be confused with WorkBuddy host Golden scenarios",
+      "status": "fixed_60_dirty_60_successor_23_passed_rc8_scope_failed_rc9_pending"
+    },
+    {
+      "id": "P0-SUPPLY-CHAIN",
+      "gap": "a deterministic public ZIP and external physical receipt must be generated once without overwriting its failed predecessor",
+      "status": "rc3_through_rc8_immutable_preserved_rc9_generation_pending"
+    },
+    {
+      "id": "P0-OPEN-PLATFORM",
+      "gap": "Expert and embedded Skill metadata must match current platform contracts and remain separate from Buddy application configuration",
+      "status": "rc8_validator_shadow_passed_rc9_shadow_pending"
+    }
+  ],
+  "p1": [
+    {
+      "id": "P1-MEMORY",
+      "gap": "layered memory and session lifecycle",
+      "status": "schema_and_policy_added_runtime_pending"
+    },
+    {
+      "id": "P1-MULTIAGENT",
+      "gap": "bounded task dispatch, timeout, partial, cancellation, join and recovery",
+      "status": "package_local_contract_and_governance_present_host_execution_pending"
+    },
+    {
+      "id": "P1-MEDIA",
+      "gap": "real PDF/OCR/Office/audio/video parsing, failure list and audited delivery",
+      "status": "structured_intake_ready_real_host_processors_pending"
+    },
+    {
+      "id": "P1-CONSENT-AND-TIMELINE",
+      "gap": "source-level consent withdrawal, question map and timeline arbitration",
+      "status": "schema_and_reference_present_runtime_pending"
+    },
+    {
+      "id": "P1-VISUAL-STATE",
+      "gap": "visual content state, parented patch and unified editorial log",
+      "status": "revision_contract_partial"
+    },
+    {
+      "id": "P1-FULL-QC",
+      "gap": "S/P/C/B, cross-chapter consistency and final-clean execution on representative books",
+      "status": "offline_gates_passed_whole_book_evidence_pending"
+    },
+    {
+      "id": "P1-LEGACY-MIGRATION",
+      "gap": "26.8.26 ContinuationCapsule and existing BookWriter project migration",
+      "status": "static_compatibility_only_migration_fixture_pending"
+    }
+  ],
+  "p2": [
+    {
+      "id": "P2-BUDDY-APPLICATION",
+      "gap": "map the internal Buddy design to the official WorkBuddy application configuration, preview and review lifecycle",
+      "status": "proposal_only_not_uploaded"
+    },
+    {
+      "id": "P2-CONNECTOR",
+      "gap": "optional tools/list and same-binding value receipt after first value",
+      "status": "optional_contract_only"
+    },
+    {
+      "id": "P2-AUDIO-VIDEO-DECODING",
+      "gap": "package-local or explicitly host-provided full audio/video decoding and extraction",
+      "status": "current_host_derivative_intake_only"
+    }
+  ],
+  "invariant": "No gap status may be promoted to completed without a current receipt covering the exact input, scope, bytes or content reference, result and evidence layer."
+}

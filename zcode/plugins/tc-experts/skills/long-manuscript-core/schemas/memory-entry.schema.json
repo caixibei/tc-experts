@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.memory-entry/v1",
+  "title": "Layered Memory Entry",
+  "type": "object",
+  "required": ["memoryId", "layer", "content", "source", "status"],
+  "properties": {
+    "memoryId": {"type": "string", "minLength": 1},
+    "layer": {"enum": ["project_truth", "workspace_log", "host_memory", "user_preference"]},
+    "content": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "sourceDigest": {"type": ["string", "null"]},
+    "status": {"enum": ["active", "superseded", "withdrawn", "conflicted", "pending_review"]},
+    "updatedBy": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

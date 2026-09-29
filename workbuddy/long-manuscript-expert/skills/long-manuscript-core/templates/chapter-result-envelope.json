@@ -1,0 +1,38 @@
+{
+  "schema": "manuscriptos.chapter-result/v1",
+  "runId": "run_example",
+  "chapterId": "ch_03",
+  "workerRole": "evidence_worker",
+  "taskClass": "evidence_batch",
+  "revision": 1,
+  "status": "completed",
+  "confidence": "中",
+  "conclusionReady": true,
+  "receiptId": "unavailable",
+  "evidenceRefs": [
+    "source:0000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "coverage": {
+    "covered": ["ch_03"],
+    "residual": [],
+    "skipped": [],
+    "failed": [],
+    "denominator": {
+      "kind": "claim_count",
+      "total": 12,
+      "processed": 12
+    }
+  },
+  "sections": {
+    "output": "本批实质产出；证据批为核验结果，盘点批为清单，审校批为问题清单",
+    "evidenceAssessment": "事实、估计、假设、判断、未知、置信度与最强反证",
+    "uncertainty": "仍需用户确认或独立核对的项；没有时明确写未发现",
+    "blockers": "阻断本批完成的前提；没有时明确写无",
+    "dissent": "保留异议；没有已识别异议时明确写未发现"
+  },
+  "notes": [
+    "status 取值：completed / partial / blocked。",
+    "partial 与 blocked 必须填写 coverage.residual 或 sections.blockers，不得只写状态。",
+    "workerRole 不产出最终正文；正文合并只由 writing_owner 执行。"
+  ]
+}

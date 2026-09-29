@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.recovery-checkpoint/v1",
+  "title": "Project Recovery Checkpoint",
+  "type": "object",
+  "required": ["checkpointId", "projectState", "runStage", "materialScope", "inputDigests", "status"],
+  "properties": {
+    "checkpointId": {"type": "string", "minLength": 1},
+    "projectState": {"type": "string", "minLength": 1},
+    "runStage": {"enum": ["S0", "S1", "S2", "S3", "S4", "S5", "S6"]},
+    "materialScope": {"type": "array", "items": {"type": "string"}},
+    "inputDigests": {"type": "array", "items": {"type": "string"}},
+    "artifactIds": {"type": "array", "items": {"type": "string"}},
+    "patchIds": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["valid", "partial", "stale", "conflicted"]},
+    "resumeAllowed": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}

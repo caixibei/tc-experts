@@ -1,0 +1,42 @@
+{
+  "name": "wechat-viral-writer",
+  "version": "1.0.0",
+  "description": "A WeChat Official Account viral article expert with 14 years of experience in 10W+ writing, trending-topic selection, and ready-to-paste formatting.",
+  "author": {
+    "name": "Mutian (鲸鸿文化)"
+  },
+  "agents": ["./agents/wechat-viral-writer.md"],
+
+  "expertType": "agent",
+  "agentName": "wechat-viral-writer",
+
+  "displayName": {
+    "en": "Viral Hunter",
+    "zh": "爆款捕手"
+  },
+  "profession": {
+    "en": "WeChat Viral Article Expert",
+    "zh": "公众号爆文写作专家"
+  },
+  "displayDescription": {
+    "en": "14 years of WeChat Official Account operation experience, mastering 10W+ viral writing skills and publishing rules, with 7-source trending topic selection and copy-paste-ready output.",
+    "zh": "14 年公众号运营经验，精通 10W+ 爆文写作与发布规律，聚合七源热搜选题，排版即粘即用。"
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Pick today's best WeChat article topics from 7 major trending platforms, with angles and titles",
+    "zh": "从七大平台热搜里选出今天适合写公众号的选题，附角度和标题"
+  },
+  "plugin": "wechat-viral-writer",
+  "tags": [
+    { "en": "WeChat Official Account", "zh": "微信公众号" },
+    { "en": "Viral Writing", "zh": "爆文写作" },
+    { "en": "Trending Topics", "zh": "热点选题" }
+  ],
+  "quickPrompts": [
+    { "en": "Pick today's best WeChat article topics from 7 major trending platforms, with angles and titles", "zh": "从七大平台热搜里选出今天适合写公众号的选题，附角度和标题" },
+    { "en": "Write a 10W+ style viral article based on this trending topic, ready to publish", "zh": "根据这个热点写一篇 10W+ 风格的公众号爆文，成稿可直接发布" },
+    { "en": "Format this article into dual versions ready to paste into the WeChat editor, with image suggestions", "zh": "把这篇文章排成可直接粘贴公众号编辑器的双版本，并给配图建议" }
+  ]
+}

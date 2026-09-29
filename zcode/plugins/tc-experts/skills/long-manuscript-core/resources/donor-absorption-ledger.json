@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "fbs.donor-absorption-ledger/v1",
+  "targetPackage": "long-manuscript-expert",
+  "targetVersion": "26.9.10",
+  "runtimeDependencyAllowed": false,
+  "entries": [
+    {
+      "donorId": "long-manuscript-expert",
+      "observedVersion": "26.8.26",
+      "sourceClass": "listed_package_snapshot",
+      "mechanisms": [
+        {
+          "id": "c13-five-entry-and-scene-baseline",
+          "status": "retained_baseline",
+          "packageLocalAssets": ["resources/user-entry-registry.json", "resources/scene-registry.json", "scripts/manuscript-kernel.mjs"],
+          "evidenceClass": "offline_fixed_regression",
+          "remainingGate": "WorkBuddy 5.5.3 current-session first-value and migration smoke"
+        }
+      ]
+    },
+    {
+      "donorId": "fbs-bookwriter",
+      "observedVersion": "3.0.1",
+      "sourceClass": "installed_skill_snapshot",
+      "mechanisms": [
+        {
+          "id": "s0-s6-stage-and-release-governance",
+          "status": "package_local_fixture_validated",
+          "packageLocalAssets": ["resources/stage-gate-registry.json", "scripts/stage-runtime.mjs", "scripts/release-governor.mjs"],
+          "evidenceClass": "governance_fixture",
+          "remainingGate": "real manuscript lifecycle and current human release receipts"
+        },
+        {
+          "id": "spcb-quality-and-final-draft-chain",
+          "status": "package_local_partial",
+          "packageLocalAssets": ["scripts/quality/quality-gate-runtime.mjs", "scripts/quality/final-clean-gate.mjs"],
+          "evidenceClass": "offline_fixed_regression",
+          "remainingGate": "whole-book S/P/C/B execution and worst-case report"
+        },
+        {
+          "id": "context-memory-multiagent",
+          "status": "contract_only",
+          "packageLocalAssets": ["resources/memory-layer-policy.md", "schemas/agent-task.schema.json", "scripts/multiagent-orchestrator.mjs"],
+          "evidenceClass": "static_asset",
+          "remainingGate": "bounded dispatch join cancel recovery and persistent memory lifecycle"
+        }
+      ]
+    },
+    {
+      "donorId": "mibao-media-archivist",
+      "observedVersion": "26.8.29",
+      "sourceClass": "listed_package_snapshot",
+      "mechanisms": [
+        {
+          "id": "preservation-layers-and-cost-aware-ai-index",
+          "status": "package_local_fixture_validated",
+          "packageLocalAssets": ["references/workbuddy-multimodal-dirty-material-intake.md", "scripts/material-intake/runtime.mjs", "schemas/material-intake-result.schema.json"],
+          "evidenceClass": "offline_fixed_regression",
+          "remainingGate": "real WorkBuddy attachment parsing throughput and low-confidence review"
+        }
+      ]
+    },
+    {
+      "donorId": "fbsir-mom-dialogue-expert",
+      "observedVersion": "26.8.27",
+      "sourceClass": "listed_package_snapshot",
+      "mechanisms": [
+        {
+          "id": "source-transaction-long-media-batching-consent",
+          "status": "package_local_fixture_validated",
+          "packageLocalAssets": ["scripts/material-intake/runtime.mjs", "schemas/material-item.schema.json", "schemas/consent-state.schema.json"],
+          "evidenceClass": "offline_fixed_regression",
+          "remainingGate": "actual incremental scan, disk checkpoint and consent withdrawal workflow"
+        }
+      ]
+    },
+    {
+      "donorId": "tietu-toutiao",
+      "observedVersion": "26.8.31",
+      "sourceClass": "listed_package_snapshot",
+      "mechanisms": [
+        {
+          "id": "content-state-structured-patch-rollback",
+          "status": "package_local_partial",
+          "packageLocalAssets": ["schemas/revision-patch.schema.json", "scripts/capabilities/scope-lock-diff.mjs"],
+          "evidenceClass": "offline_fixed_regression",
+          "remainingGate": "unified editorial log and multi-artifact rollback"
+        }
+      ]
+    },
+    {
+      "donorId": "fbsir-beike-yi",
+      "observedVersion": "0.2.1",
+      "sourceClass": "listed_package_snapshot",
+      "mechanisms": [
+        {
+          "id": "material-basket-new-version-writeback-readback",
+          "status": "contract_only",
+          "packageLocalAssets": ["schemas/local-workspace-contract.schema.json", "schemas/writeback-receipt.schema.json", "references/local-workspace-mode.md"],
+          "evidenceClass": "static_asset",
+          "remainingGate": "authorized WorkBuddy write and physical readback fixture"
+        }
+      ]
+    },
+    {
+      "donorId": "fbsir-eight-seat-board",
+      "observedVersion": "26.8.19",
+      "sourceClass": "listed_package_snapshot",
+      "mechanisms": [
+        {
+          "id": "decisive-question-budget-single-owner-merge",
+          "status": "package_local_partial",
+          "packageLocalAssets": ["resources/user-entry-registry.json", "schemas/agent-task.schema.json", "scripts/multiagent-orchestrator.mjs"],
+          "evidenceClass": "static_asset",
+          "remainingGate": "WorkBuddy Agent dispatch and bounded result collection"
+        }
+      ]
+    },
+    {
+      "donorId": "fbsir-aigc-compliance-red-team",
+      "observedVersion": "26.8.15",
+      "sourceClass": "listed_package_snapshot",
+      "mechanisms": [
+        {
+          "id": "risk-card-low-confidence-human-release-gate",
+          "status": "package_local_fixture_validated",
+          "packageLocalAssets": ["resources/gates/publish-readiness-policy.json", "scripts/release-governor.mjs", "schemas/release-human-receipt.schema.json"],
+          "evidenceClass": "governance_fixture",
+          "remainingGate": "current human review and publication decision"
+        }
+      ]
+    },
+    {
+      "donorId": "fbs-connector",
+      "observedVersion": "26.8.20-contract-1.2.9",
+      "sourceClass": "installed_connector_snapshot",
+      "mechanisms": [
+        {
+          "id": "optional-after-first-value-receipt-bound-routing",
+          "status": "contract_only",
+          "packageLocalAssets": ["resources/capability-port-adapter-registry.json", "scripts/adapter-runtime.mjs"],
+          "evidenceClass": "static_asset",
+          "remainingGate": "optional current tools/list and same-binding service receipt"
+        }
+      ]
+    }
+  ],
+  "invariants": [
+    "Donor names and versions are provenance only, never executable paths.",
+    "Every executable dependency resolves inside the public package.",
+    "No donor directory, connector installation or sibling expert is required for first value.",
+    "Offline fixtures never prove WorkBuddy host execution, listing, natural use or business outcomes."
+  ]
+}

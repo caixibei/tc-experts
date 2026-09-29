@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.media-asset-record/v1",
+  "title": "Media Asset Record",
+  "type": "object",
+  "required": ["assetId", "sourceRef", "sha256", "mediaType", "status"],
+  "properties": {
+    "assetId": {"type": "string", "minLength": 1},
+    "sourceRef": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+    "mediaType": {"type": "string", "minLength": 1},
+    "technicalMetadata": {"type": "object", "additionalProperties": true},
+    "derivedArtifactIds": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["discovered", "indexed", "partial", "retryable", "failed", "quarantined", "review_required", "accepted"]},
+    "failureRefs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

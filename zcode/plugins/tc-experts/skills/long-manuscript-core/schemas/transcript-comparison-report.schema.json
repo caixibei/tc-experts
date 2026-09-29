@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/transcript-comparison-report.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "verdict", "machineFindings", "sourceReviewedDecisions", "minorityContributions", "remainingHumanRisks", "nextStep", "compareOnly", "artifactWritten"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_transcript_comparison_report_template" },
+    "verdict": { "type": "object", "additionalProperties": false, "required": ["preferredBaseId", "scope", "evidenceState"], "properties": { "preferredBaseId": { "type": ["string", "null"] }, "scope": { "type": "string" }, "evidenceState": { "enum": ["advisory", "machine_receipt_present", "human_review_pending"] } } },
+    "machineFindings": { "type": "array", "items": { "type": "object" } },
+    "sourceReviewedDecisions": { "type": "array", "items": { "type": "object" } },
+    "minorityContributions": { "type": "array", "items": { "type": "object" } },
+    "remainingHumanRisks": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "nextStep": { "type": "string", "minLength": 1 },
+    "compareOnly": { "const": true },
+    "artifactWritten": { "const": false }
+  }
+}

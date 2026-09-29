@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "manuscriptos.story-card/v1",
+  "title": "StoryCard",
+  "description": "传记 / 回忆录 / 口述史 / 家谱场景的故事卡。26.9.18 吸收自 fbsir-mom-dialogue-expert 的故事卡，把'妈妈'抽象为'传主 / 主轴人物'，用于所有以人物为主轴的长文档场景。",
+  "type": "object",
+  "required": [
+    "storyId",
+    "title",
+    "subjectRelation",
+    "sourceRefs",
+    "sourceStatus",
+    "visibility",
+    "manuscriptUse",
+    "publicUse"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "storyId": { "type": "string", "description": "稳定标识，同一故事跨版本复用" },
+    "title": { "type": "string" },
+    "subjectRelation": {
+      "type": "string",
+      "description": "与传主 / 主轴人物的关系",
+      "enum": [
+        "self",
+        "parent",
+        "grandparent",
+        "spouse",
+        "sibling",
+        "child",
+        "relative",
+        "mentor",
+        "colleague",
+        "other",
+        "unknown"
+      ]
+    },
+    "timeExpression": { "type": ["string", "null"], "description": "材料中的时间表述原样保留；无表述时为 null" },
+    "timePrecision": {
+      "type": "string",
+      "enum": ["exact_date", "month", "year", "decade", "period", "relative", "approximate", "unknown"],
+      "description": "时间精度；unknown 表示材料未给出可定位的时间"
+    },
+    "place": { "type": ["string", "null"] },
+    "people": { "type": "array", "items": { "type": "string" }, "description": "涉及人物，仅写材料出现的称呼" },
+    "eventSummary": { "type": "string", "description": "事件概要，不依赖字符级精确性" },
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "来源引用；每条必须可回读"
+    },
+    "sourceStatus": {
+      "type": "string",
+      "description": "来源状态。视觉观察不得写成已核实。",
+      "enum": [
+        "supplied_transcript",
+        "visual_observation_unverified",
+        "candidate_transcription",
+        "source_verified",
+        "user_confirmed",
+        "conflicting",
+        "withdrawn",
+        "unknown"
+      ]
+    },
+    "transcriptWording": { "type": ["string", "null"], "description": "第一层：原话或候选转录，保留原始措辞" },
+    "organizedWording": { "type": ["string", "null"], "description": "第二层：整理表达，必须明确标记为改写" },
+    "manuscriptWording": { "type": ["string", "null"], "description": "第三层：成稿表达，可读性优先但仍受来源约束" },
+    "confidence": { "type": "string", "enum": ["high", "medium", "low", "unknown"] },
+    "unknowns": { "type": "array", "items": { "type": "string" }, "description": "未知项；为空时必须是空数组，不能省略" },
+    "sensitivity": {
+      "type": "string",
+      "enum": ["none", "personal", "family_private", "third_party", "legally_sensitive", "unknown"]
+    },
+    "visibility": {
+      "type": "string",
+      "description": "可见范围。冲突时取更严格的一方。",
+      "enum": ["private", "family_only", "manuscript_only", "public_allowed", "unknown"]
+    },
+    "manuscriptUse": { "type": "boolean", "description": "是否允许进入手稿" },
+    "publicUse": { "type": "boolean", "description": "是否允许公开传播；与 manuscriptUse 相互独立" },
+    "confirmation": {
+      "type": ["object", "null"],
+      "description": "哈希绑定确认。storySha256 必须等于确认时故事卡的字节哈希。",
+      "properties": {
+        "storySha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "confirmedSourceLinkage": { "type": "boolean" },
+        "confirmedTranscriptWording": { "type": "boolean" },
+        "confirmedBy": { "type": "string" },
+        "confirmedAt": { "type": "string" }
+      },
+      "required": ["storySha256", "confirmedSourceLinkage", "confirmedTranscriptWording"]
+    },
+    "supersedes": { "type": ["string", "null"], "description": "被本卡替代的旧 storyId；替代不删除旧卡" }
+  },
+  "notes": [
+    "确认只把候选转为'已确认'，不改 visibility / manuscriptUse / publicUse。三权分离。",
+    "三层稿（原话 / 整理 / 成稿）必须同时存在或明确为 null，不得只有成稿。",
+    "visibility 冲突时取更严格的一方。"
+  ]
+}

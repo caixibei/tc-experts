@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/material-intake-result.schema.json",
+  "title": "Deterministic WorkBuddy dirty-material intake result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "capabilityId",
+    "requestId",
+    "ok",
+    "status",
+    "host",
+    "modelDeclarationReceipt",
+    "items",
+    "expertUseReceipt",
+    "capacityReceipt",
+    "batchReceipt",
+    "flowControlReceipt",
+    "summary",
+    "errors",
+    "warnings",
+    "executionBoundary",
+    "resultDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "manuscriptos.material-intake-result/v1" },
+    "capabilityId": { "const": "workbuddy-dirty-material-intake" },
+    "requestId": { "type": ["string", "null"] },
+    "ok": { "type": "boolean" },
+    "status": { "enum": ["observed", "partial", "not_observed", "degraded", "blocked", "invalid_input"] },
+    "host": { "type": ["object", "null"] },
+    "modelDeclarationReceipt": { "type": ["object", "null"] },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "modality",
+          "order",
+          "materialRole",
+          "useScope",
+          "roleReceipt",
+          "sourceRef",
+          "contentRef",
+          "declaredBytes",
+          "sourceScope",
+          "inputDigest",
+          "inputDigestEvidence",
+          "originalReadOnly",
+          "originalMutationCount",
+          "presentationReceipt",
+          "observations",
+          "extractionReceipt",
+          "inventoryReceipt",
+          "coverageReceipt",
+          "maturityReceipt",
+          "status",
+          "stop"
+        ],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "modality": { "enum": ["text", "pdf", "image", "table", "office", "audio", "video", "web"] },
+          "order": { "type": "integer", "minimum": 1 },
+          "materialRole": { "enum": ["content", "reference_style", "both_scoped", "control_instruction"] },
+          "useScope": { "type": "object" },
+          "roleReceipt": { "type": "object" },
+          "sourceRef": { "type": "string", "minLength": 1 },
+          "contentRef": { "type": ["string", "null"] },
+          "declaredBytes": { "type": ["integer", "null"], "minimum": 0, "maximum": 9007199254740991 },
+          "sourceScope": { "type": "object" },
+          "inputDigest": { "$ref": "#/$defs/sha256" },
+          "inputDigestEvidence": { "enum": ["bytes_observed", "derived_artifact_observed", "digest_supplied_not_observed", "descriptor_only"] },
+          "originalReadOnly": { "const": true },
+          "originalMutationCount": { "const": 0 },
+          "presentationReceipt": { "type": "object" },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["contentReceipt", "observationDigest"],
+              "not": { "required": ["content"] },
+              "properties": {
+                "contentReceipt": {
+                  "type": "object",
+                  "required": ["contentRef", "contentDigest", "smallSummary", "rawContentRetained"],
+                  "properties": {
+                    "contentRef": { "type": ["string", "null"] },
+                    "contentDigest": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/sha256" }] },
+                    "smallSummary": { "type": ["string", "null"], "maxLength": 512 },
+                    "rawContentRetained": { "const": false }
+                  }
+                },
+                "observationDigest": { "$ref": "#/$defs/sha256" }
+              }
+            }
+          },
+          "extractionReceipt": { "type": "object" },
+          "inventoryReceipt": { "type": "object" },
+          "coverageReceipt": { "type": "object" },
+          "maturityReceipt": {
+            "type": "object",
+            "required": ["level", "inventoryState", "hashMode", "coverageState", "expertUseState", "receiptDigest"],
+            "properties": {
+              "level": { "enum": ["L0", "L1", "L2", "L3", "L4", "L5"] },
+              "inventoryState": { "enum": ["metadata_observed", "hash_pending", "hash_complete"] },
+              "hashMode": { "enum": ["metadata_only", "streaming", "incremental", "complete"] },
+              "coverageState": { "enum": ["conserved", "not_conserved"] },
+              "expertUseState": { "enum": ["not_observed", "receipt_bound_observed"] },
+              "receiptDigest": { "$ref": "#/$defs/sha256" }
+            }
+          },
+          "status": { "enum": ["observed", "partial", "not_observed", "degraded", "human_review_required"] },
+          "stop": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["required", "reasonCodes"],
+            "properties": {
+              "required": { "type": "boolean" },
+              "reasonCodes": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "expertUseReceipt": { "type": ["object", "null"] },
+    "capacityReceipt": { "type": ["object", "null"] },
+    "batchReceipt": { "type": ["object", "null"] },
+    "flowControlReceipt": { "type": ["object", "null"] },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "itemCount",
+        "observedCount",
+        "partialCount",
+        "notObservedCount",
+        "degradedCount",
+        "humanReviewRequiredCount",
+        "consumptionReady",
+        "stopRequired",
+        "stopReasons"
+      ],
+      "properties": {
+        "itemCount": { "type": "integer", "minimum": 0 },
+        "observedCount": { "type": "integer", "minimum": 0 },
+        "partialCount": { "type": "integer", "minimum": 0 },
+        "notObservedCount": { "type": "integer", "minimum": 0 },
+        "degradedCount": { "type": "integer", "minimum": 0 },
+        "humanReviewRequiredCount": { "type": "integer", "minimum": 0 },
+        "consumptionReady": { "type": "boolean" },
+        "stopRequired": { "type": "boolean" },
+        "stopReasons": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+      }
+    },
+    "errors": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "warnings": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "executionBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deterministic", "allocatedLargePayloadBytes", "externalActionCount", "hostInteractionPerformed", "networkUsed", "originalMutationCount", "originalReadOnlyEnforced", "rawContentRetained", "stdinJsonByteLimit", "runtimeBoundary"],
+      "properties": {
+        "deterministic": { "const": true },
+        "allocatedLargePayloadBytes": { "const": 0 },
+        "externalActionCount": { "const": 0 },
+        "hostInteractionPerformed": { "const": false },
+        "networkUsed": { "const": false },
+        "originalMutationCount": { "const": 0 },
+        "originalReadOnlyEnforced": { "const": true },
+        "rawContentRetained": { "const": false },
+        "stdinJsonByteLimit": { "type": "integer", "minimum": 1 },
+        "runtimeBoundary": { "const": "structured_json_observation_intake_only" }
+      }
+    },
+    "resultDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

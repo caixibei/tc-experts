@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/transcript-comparison.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "expectedPages", "preferredBase", "candidateBindings", "comparisons", "qualityAxes", "sourceVerified", "evidenceState", "hostMutationAllowed", "issues", "comparisonDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "artifactType": { "const": "manuscriptos_transcript_comparison" },
+    "expectedPages": { "oneOf": [{ "type": "null" }, { "type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": { "start": { "type": "integer", "minimum": 1 }, "end": { "type": "integer", "minimum": 1 } } }] },
+    "preferredBase": { "type": "object", "additionalProperties": false, "required": ["id", "source", "effectiveComparisonBaseId"], "properties": { "id": { "type": ["string", "null"] }, "source": { "enum": ["explicit", "manifest_current", "semantic_version", "unresolved"] }, "effectiveComparisonBaseId": { "type": "string", "minLength": 1 } } },
+    "candidateBindings": { "type": "array", "minItems": 2, "items": { "type": "object" } }, "comparisons": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/comparison" } },
+    "qualityAxes": { "type": "object", "additionalProperties": false, "required": ["transcriptionFidelity", "editorialReadability", "deliveryCleanliness"], "properties": { "transcriptionFidelity": { "const": "requires_source_adjudication" }, "editorialReadability": { "const": "not_determined_by_similarity" }, "deliveryCleanliness": { "const": "machine_observed" } } },
+    "sourceVerified": { "const": false }, "evidenceState": { "const": "advisory" }, "hostMutationAllowed": { "const": false }, "issues": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }, "comparisonDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "comparison": { "type": "object", "additionalProperties": false, "required": ["candidateId", "strictSimilarity", "normalizedSimilarity", "lowSimilarityPages", "numericConflictPages", "pageResults"], "properties": { "candidateId": { "type": "string", "minLength": 1 }, "strictSimilarity": { "type": "number", "minimum": 0, "maximum": 1 }, "normalizedSimilarity": { "type": "number", "minimum": 0, "maximum": 1 }, "lowSimilarityPages": { "type": "array", "items": { "type": "integer", "minimum": 1 } }, "numericConflictPages": { "type": "array", "items": { "type": "integer", "minimum": 1 } }, "pageResults": { "type": "array", "minItems": 1, "items": { "type": "object" } } } }
+  }
+}

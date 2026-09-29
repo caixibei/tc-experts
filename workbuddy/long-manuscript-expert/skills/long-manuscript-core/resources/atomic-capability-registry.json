@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_atomic_capability_registry",
+  "implementationDigestAlgorithm": "sha256_utf8_lf_v1",
+  "executionMode": "projection_only",
+  "hostMutationAllowed": false,
+  "filesystemWriteAllowed": false,
+  "binaryRenderingAllowed": false,
+  "externalActionAllowed": false,
+  "entries": [
+    { "id": "observe", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["capability-preflight"], "hostMutationAllowed": false },
+    { "id": "inventory", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["capability-preflight", "project-control"], "hostMutationAllowed": false },
+    { "id": "bind", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["capability-preflight", "project-control"], "hostMutationAllowed": false },
+    { "id": "normalize", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["capability-preflight"], "hostMutationAllowed": false },
+    { "id": "route", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control"], "hostMutationAllowed": false },
+    { "id": "compose", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control"], "hostMutationAllowed": false },
+    { "id": "plan", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control", "artifact-derivation"], "hostMutationAllowed": false },
+    { "id": "measure", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control"], "hostMutationAllowed": false },
+    { "id": "compare", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["review-briefing"], "hostMutationAllowed": false },
+    { "id": "adjudicate", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["review-briefing"], "hostMutationAllowed": false },
+    { "id": "patch", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control"], "hostMutationAllowed": false },
+    { "id": "merge", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control"], "hostMutationAllowed": false },
+    { "id": "project", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control"], "hostMutationAllowed": false },
+    { "id": "checkpoint", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control"], "hostMutationAllowed": false },
+    { "id": "brief", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["review-briefing"], "hostMutationAllowed": false },
+    { "id": "derive", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["artifact-derivation"], "hostMutationAllowed": false },
+    { "id": "render", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["artifact-derivation"], "hostMutationAllowed": false },
+    { "id": "gate", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["capability-preflight", "review-briefing"], "hostMutationAllowed": false },
+    { "id": "persist-plan", "implementationRef": "../scripts/atomic-capabilities/runtime.mjs", "implementationSha256": "9225db13dd622a512645d0e101634c5eb45cfabbb9a50a0c4252c6000342314b", "businessCapabilityIds": ["project-control", "artifact-derivation"], "hostMutationAllowed": false }
+  ],
+  "entryCount": 19
+}

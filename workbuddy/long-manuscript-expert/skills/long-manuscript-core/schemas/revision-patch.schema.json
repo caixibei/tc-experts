@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.revision-patch/v1",
+  "title": "Bounded Revision Patch",
+  "type": "object",
+  "required": ["patchId", "baseVersion", "scopeLock", "originalAnchor", "replacement", "requestedBy", "reviewState"],
+  "properties": {
+    "patchId": {"type": "string", "minLength": 1},
+    "baseVersion": {"type": "string", "minLength": 1},
+    "scopeLock": {"type": "string", "minLength": 1},
+    "originalAnchor": {"type": "string", "minLength": 1},
+    "replacement": {"type": "string"},
+    "reason": {"type": ["string", "null"]},
+    "requestedBy": {"type": "string", "minLength": 1},
+    "reviewState": {"enum": ["proposed", "approved", "rejected", "merged", "conflicted"]},
+    "mergedVersion": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/scene-fixture.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "fixtureKind", "fixtureId", "caseId", "sceneId", "domainProbe", "input", "context", "expected"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "fixtureKind": { "const": "scene" },
+    "fixtureId": { "type": "string", "minLength": 1 },
+    "caseId": { "type": "string", "minLength": 1 },
+    "sceneId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "domainProbe": { "type": "string", "minLength": 1 },
+    "input": { "type": "object" },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["connectorAvailable", "externalWriteAuthorized"],
+      "properties": {
+        "connectorAvailable": { "type": "boolean" },
+        "externalToolsAvailable": { "type": "boolean", "default": false },
+        "externalWriteAuthorized": { "type": "boolean" }
+      }
+    },
+    "expected": { "type": "object" }
+  }
+}

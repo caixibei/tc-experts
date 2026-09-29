@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.stage-transition-receipt/v2",
+  "title": "Stage Transition Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "receiptId",
+    "projectId",
+    "projectState",
+    "inputDigest",
+    "fromStage",
+    "toStage",
+    "requiredGates",
+    "gateReceipts",
+    "validatedGateReceipts",
+    "override",
+    "status",
+    "reason",
+    "currentReceipt",
+    "generatedAt",
+    "receiptDigestAlgorithm",
+    "receiptDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "fbs.stage-transition-receipt/v2"},
+    "receiptId": {"type": "string", "format": "uuid"},
+    "projectId": {"type": "string", "minLength": 1},
+    "projectState": {"type": "string", "minLength": 1},
+    "inputDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "fromStage": {"type": "string", "minLength": 1},
+    "toStage": {"type": "string", "minLength": 1},
+    "requiredGates": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "gateReceipts": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "validatedGateReceipts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["gateId", "path", "receiptDigest", "issuedAt", "expiresAt"],
+        "properties": {
+          "gateId": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "receiptDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "issuedAt": {"type": "string", "format": "date-time"},
+          "expiresAt": {"type": ["string", "null"], "format": "date-time"}
+        }
+      }
+    },
+    "override": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "gateIds", "receiptDigest", "issuedAt", "expiresAt"],
+          "properties": {
+            "path": {"type": "string", "minLength": 1},
+            "gateIds": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            },
+            "receiptDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "issuedAt": {"type": "string", "format": "date-time"},
+            "expiresAt": {"type": ["string", "null"], "format": "date-time"}
+          }
+        }
+      ]
+    },
+    "status": {"enum": ["advanced", "degraded"]},
+    "reason": {"type": ["string", "null"]},
+    "currentReceipt": {"const": true},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "receiptDigestAlgorithm": {"const": "sha256_canonical_json_without_receipt_digest_v1"},
+    "receiptDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

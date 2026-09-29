@@ -1,0 +1,7 @@
+{
+  "name": "tc-experts",
+  "version": "0.1.0",
+  "description": "Expert collection converted from 13 CodeBuddy expert plugins: 17 domain experts (backend architecture, embedded firmware, full-stack dev, long-form writing, M&A advisory, senior dev, software architecture, software team SOP, UI design, web dev, WeChat mini program, WeChat official account ops, viral writing) plus their dedicated companion skills.",
+  "author": { "name": "tc-experts contributors" },
+  "skills": "./skills"
+}

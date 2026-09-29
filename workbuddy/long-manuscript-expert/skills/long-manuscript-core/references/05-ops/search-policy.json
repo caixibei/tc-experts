@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "fbs.long-manuscript.search-policy/v1",
+  "name": "long-manuscript-core-search-policy",
+  "version": "26.9.18",
+  "mandatoryWebSearchStages": ["S0", "S1", "S2"],
+  "entryWorkplanes": {
+    "enabled": true,
+    "wp1": {
+      "id": "WP1",
+      "name": "对话首值面",
+      "forbiddenTerms": ["WP2", "S3", "S4", "S5", "S6", "结构锁定", "release", "deliverables"]
+    },
+    "wp2": {
+      "id": "WP2",
+      "name": "书稿工作面",
+      "firstUsableWorkspaceDirs": [".fbs", "deliverables", "releases"],
+      "stateFiles": [".fbs/esm-state.md", ".fbs/规范执行状态.md", ".fbs/chapter-status.md"]
+    }
+  },
+  "searchPreflightContract": {
+    "enabled": true,
+    "requiredFields": ["whyNow", "searchScope", "nextStepAfterSearch", "offlineFallback"],
+    "mustAnnounceBeforeStages": ["S0", "S1", "S2", "S3"],
+    "mustAnnounceBeforeChapterSearch": true,
+    "blockedIfMissingAnnouncement": true,
+    "defaultUserFacingTemplate": "我先查{searchScope}，确认{whyNow}；查完后直接进入{nextStepAfterSearch}。如果当前无法联网，{offlineFallback}。"
+  },
+  "workspaceGovernance": {
+    "enabled": true,
+    "projectTruthDirs": [".fbs", "deliverables", "releases"],
+    "projectTruthStateFiles": [".fbs/esm-state.md", ".fbs/规范执行状态.md", ".fbs/chapter-status.md"],
+    "artifactBoundary": "过程性 artifact 不得充当项目真值",
+    "readOnlyContextSources": ["user_materials"],
+    "userVisiblePreference": ["editable_structure", "substantive_text", "single_next_action"],
+    "firstUsableWorkspace": {
+      "id": "WP2",
+      "requiredDirs": [".fbs", "deliverables", "releases"],
+      "mustExplainToUser": "原件保持只读；持久写入只生成新版本并回读。"
+    }
+  },
+  "queryOptimizationAudit": {
+    "enabled": true,
+    "fieldName": "queryOptimization",
+    "skipWhenOkFalse": true
+  },
+  "temporalAccuracy": {
+    "requireTimestampSearchAtS0": true,
+    "forbidBareYearWithoutSource": true,
+    "yearLabelPolicy": "search_before_write"
+  },
+  "claimBoundSourcePolicy": {
+    "enabled": true,
+    "principle": "不存在一张对所有主张都有效的全局来源排名。先明确要证明什么、证明哪个时间点、涉及哪个主体和属地，再选适用来源。",
+    "procedure": [
+      "先写清主张：predicate / value / valueType / unit / 适用主体 / 适用期间",
+      "再选来源类型：不同类型的主张适用不同来源，不能互换",
+      "逐条记录 sourceUsageAssessment：usageEligibility 取 standalone 或 corroborative",
+      "关键主张计入证据门时必须为 supports 且来源可回读"
+    ],
+    "claimTypeToSourceHint": [
+      { "claimType": "regulatory_or_policy", "preferred": "监管或政策原文", "cannotSubstitute": "新闻转述、聚合页摘要" },
+      { "claimType": "organization_fact", "preferred": "机构原文、公告、年报", "cannotSubstitute": "二手报道" },
+      { "claimType": "research_finding", "preferred": "论文或数据集原文", "cannotSubstitute": "科普转述" },
+      { "claimType": "market_or_financial", "preferred": "具名披露或数据源", "cannotSubstitute": "自媒体估算" },
+      { "claimType": "personal_or_family", "preferred": "当事人陈述、原始影像或手稿", "cannotSubstitute": "第三方转述" },
+      { "claimType": "event_time", "preferred": "带时间戳的一手记录", "cannotSubstitute": "文件日期或会话日期" }
+    ],
+    "noVoteByCount": true,
+    "sourceCountIsNotQuality": true
+  },
+  "sourceIndependence": {
+    "enabled": true,
+    "sourceFamilyIdRequired": true,
+    "sameFamilyRule": "同源转载、同一稿件衍生、图表或 OCR 摘要仍属同一来源家族，不增加独立性。",
+    "corroborationRequiresDistinctFamilies": true,
+    "forbidden": "不得把同一来源家族的多份材料当成多条独立证据"
+  },
+  "collectionCompleteness": {
+    "enabled": true,
+    "requiredFields": ["expected", "returned", "failed", "missing"],
+    "closureRule": "只有关键分支实际返回或明确结算，才能称研究收齐。",
+    "quantityIsBudgetNotTarget": true,
+    "failureClasses": [
+      "not_found",
+      "access_denied",
+      "timeout",
+      "parse_failed",
+      "tool_unavailable",
+      "source_conflict"
+    ],
+    "routeChangeRule": "换路必须保持原来源范围；放宽范围需先向用户说明。"
+  },
+  "counterEvidenceQueryFamilies": {
+    "enabled": true,
+    "families": [
+      "主体状态反证：注销、吊销、破产、失信、停业",
+      "项目状态反证：终止、延期、停产、缩减、撤回",
+      "合规反证：处罚、诉讼、监管问询",
+      "组织反证：裁员、核心人员流失、股东变更"
+    ],
+    "visibilityRule": "重要反证必须与支持材料同等可见，不得放入不可见附录或脚注。",
+    "unknownIsNotCounterEvidence": true
+  },
+  "networkBoundary": {
+    "connectorRequired": true,
+    "connectorId": "fbs-connector",
+    "connectorRequiredNote": "本产品要求启用福帮手连接器；连接器是增强通道，不是搜索或首值的前置条件，缺失时不阻断本地写作。",
+    "externalSearchRequiresCurrentTaskNeed": true,
+    "externalSearchRequiresUserNotice": true,
+    "offlineFallbackMustRemainAvailable": true
+  },
+  "privacy": {
+    "emitRawQueries": false,
+    "emitSourceExcerptsInAudit": false,
+    "useRelativeProjectPathsOnly": true
+  },
+  "evidenceBoundary": "package_local_search_policy_only_not_search_execution_or_source_truth_proof"
+}

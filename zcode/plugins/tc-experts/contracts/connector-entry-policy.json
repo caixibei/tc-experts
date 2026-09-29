@@ -1,0 +1,141 @@
+{
+  "schema": "fbsir.connector-entry-policy/v1",
+  "product": {
+    "packageId": "long-manuscript-expert",
+    "productVersion": "26.9.18",
+    "connectorId": "fbs-connector",
+    "connectorPublicName": "福帮手人机协同连接器",
+    "declaredVia": "plugin.json#/dependencies/connectors"
+  },
+  "purpose": "定义福帮手连接器作为本产品准入条件时的分层状态与降级边界。本文件是包内产品政策，不修改连接器实现，不新增 MCP、网络客户端或凭据。",
+  "layers": [
+    {
+      "layer": "product_connection",
+      "evidence": "host_dependency_guide_and_connection_state",
+      "allows": [
+        "enter_expert_conversation"
+      ],
+      "doesNotProve": [
+        "tool_availability",
+        "identity_verified",
+        "entitlement",
+        "action_authorization"
+      ]
+    },
+    {
+      "layer": "tool_availability",
+      "evidence": "current_host_tool_surface",
+      "allows": [
+        "attempt_visible_tool_call"
+      ],
+      "doesNotProve": [
+        "business_success",
+        "natural_usage"
+      ]
+    },
+    {
+      "layer": "identity_and_route",
+      "evidence": "successful_business_return_within_same_binding",
+      "allows": [
+        "same_context_service_next_step"
+      ],
+      "doesNotProve": [
+        "entitlement",
+        "external_action_authorization"
+      ]
+    },
+    {
+      "layer": "entitlement_and_authorization",
+      "evidence": "entitlement_receipt_and_explicit_user_approval",
+      "allows": [
+        "the_specific_service_or_external_action_only"
+      ],
+      "doesNotProve": [
+        "any_other_action"
+      ]
+    }
+  ],
+  "handshake": {
+    "toolChain": [
+      "skill_whoami",
+      "fbs_scene_pack_query",
+      "skill_consume"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "tool": "skill_whoami",
+        "precondition": "only_confirmed_identity_entry_and_host_fields",
+        "success": "returns_valid_identity_or_route_envelope_with_next_step",
+        "sideEffectClass": "read_only"
+      },
+      {
+        "order": 2,
+        "tool": "fbs_scene_pack_query",
+        "precondition": "whoami_explicitly_named_it_and_same_binding",
+        "forwardingRule": "forward_actionEnvelope_toolArguments_verbatim_no_add_no_rename_no_case_change",
+        "success": "returns_scene_content_with_verifiable_next_step",
+        "sideEffectClass": "read_only"
+      },
+      {
+        "order": 3,
+        "tool": "skill_consume",
+        "precondition": "content_actually_delivered_and_idempotency_key_from_same_envelope",
+        "success": "server_confirms_progress_recorded",
+        "sideEffectClass": "write_progress",
+        "onLostResponse": "read_back_pending_state_do_not_generate_new_key"
+      }
+    ],
+    "failureRule": "any_isError_true_or_business_success_false_or_missing_expected_field_is_not_success; HTTP 200 alone is not business success",
+    "firstValueRequiresConnector": false,
+    "sameBindingRequiredForFirstValue": false,
+    "sameBindingRequiredForClosure": true
+  },
+  "gateRules": {
+    "newFormalDeliveryRequiresEntry": true,
+    "entryMissingAction": "do_not_start_service_side_delivery_or_write_project_state",
+    "userCancelsConnection": "stop_without_repeat_prompting",
+    "connectionMustNotBeTiedTo": [
+      "payment",
+      "lebao_reward",
+      "full_capability_grant"
+    ],
+    "existingProjectDataRetrievalUnaffectedByServiceFailure": true,
+    "rewardNeverPrecedesValueDelivery": true,
+    "disabledToolsRemainDisabled": true
+  },
+  "serviceUnavailablePolicy": {
+    "localDeliverablesPreserved": true,
+    "remoteDependentNextStepsPaused": true,
+    "userAskedToTroubleshootConnector": false,
+    "mayClaimServiceSuccess": false,
+    "mayRestateAsMaterialGap": false,
+    "note": "准入与运行状态分层；服务不可用不等于材料不足，也不得写成材料缺口。不要求普通用户检查工具、MCP、连接器、插件、会话或运行状态，也不要求查看日志。"
+  },
+  "frontstagePolicy": {
+    "visibleJsonForbidden": true,
+    "internalIdVisibleForbidden": true,
+    "internalTermsMustNotAppear": [
+      "skill_whoami",
+      "fbs_scene_pack_query",
+      "skill_consume",
+      "actionEnvelope",
+      "MCP",
+      "connector",
+      "binding",
+      "token",
+      "hash",
+      "trace",
+      "idempotencyKey"
+    ],
+    "rewriteToBusinessLanguage": true
+  },
+  "consumptionRules": {
+    "singleServiceContextOwner": "manuscript_writing_owner",
+    "dedupeByBusinessOutcome": true,
+    "repeatedByFormatOrRetry": false,
+    "consumeRequiresActualDelivery": true,
+    "unresolvedWriteHandling": "keep_outcome_unknown_do_not_replay_with_new_key"
+  },
+  "evidenceBoundary": "package_local_admission_and_layer_policy_only_not_host_enforcement_connector_route_entitlement_or_natural_usage"
+}

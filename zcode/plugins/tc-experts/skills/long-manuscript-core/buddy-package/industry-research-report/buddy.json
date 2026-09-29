@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "fbs.buddy-package/v1",
+  "packageId": "industry-research-report",
+  "version": "1.0.0",
+  "displayName": {"zh": "行业研究报告Buddy", "en": "Industry Research Report Buddy"},
+  "scenarios": ["material_intake", "source_aware_research", "report_drafting", "evidence_review", "report_delivery"],
+  "templates": ["industry-research-report-template"],
+  "policies": ["local-first", "source-traceability", "time-anchor-required", "release-human-review"],
+  "evaluators": ["claim-evidence-coverage", "time-anchor-completeness", "delivery-readiness"],
+  "adapters": ["text", "pdf_text", "table", "office_route", "web"],
+  "brand": null,
+  "minimumWorkbuddyVersion": null,
+  "targetWorkbuddyVersion": "5.5.3",
+  "platformMappingState": "proposal_only_not_open_platform_uploaded",
+  "openPlatformMapping": "open-platform-mapping.json",
+  "connectorRequired": false,
+  "coreOverride": false
+}

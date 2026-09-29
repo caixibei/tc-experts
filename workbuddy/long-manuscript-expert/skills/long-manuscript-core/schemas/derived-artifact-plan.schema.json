@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/derived-artifact-plan.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "sourceArtifactDigest", "artifacts", "unavailable", "status", "factGraphReused", "writesPerformed", "binaryRenderingPerformed", "hostMutationAllowed", "externalActionCount", "planDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_derived_artifact_plan" },
+    "sourceArtifactDigest": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+    "artifacts": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "kind", "format", "sourceObjectRefs", "contentProjection", "state"], "properties": { "id": { "type": "string", "minLength": 1 }, "kind": { "enum": ["glossary", "chapter_card", "claim_appendix", "binary_render_plan"] }, "format": { "type": "string", "minLength": 1 }, "sourceObjectRefs": { "$ref": "#/$defs/stringSet" }, "contentProjection": {}, "state": { "const": "planned" } } } },
+    "unavailable": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["kind", "reason"], "properties": { "kind": { "type": "string", "minLength": 1 }, "reason": { "type": "string", "minLength": 1 } } } },
+    "status": { "enum": ["ready", "partial", "unavailable"] },
+    "factGraphReused": { "type": "boolean" },
+    "writesPerformed": { "const": false },
+    "binaryRenderingPerformed": { "const": false },
+    "hostMutationAllowed": { "const": false },
+    "externalActionCount": { "const": 0 },
+    "planDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stringSet": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

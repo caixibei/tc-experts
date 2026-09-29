@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/review-brief.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "projectId", "chapterId", "chapterDigest", "role", "writingOwner", "reviewFocus", "standards", "sourceRefs", "contentRiskClass", "humanOwnerRole", "outputContract", "advisoryOnly", "hostMutationAllowed", "externalActionCount", "briefDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_review_brief" },
+    "projectId": { "type": "string", "minLength": 1 },
+    "chapterId": { "type": "string", "minLength": 1 },
+    "chapterDigest": { "$ref": "#/$defs/sha256" },
+    "role": { "const": "read_only_reviewer" },
+    "writingOwner": { "type": "string", "minLength": 1 },
+    "reviewFocus": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["structure", "continuity", "readability", "evidence", "rights", "delivery", "source_fidelity"] } },
+    "standards": { "$ref": "#/$defs/stringSet" },
+    "sourceRefs": { "$ref": "#/$defs/stringSet" },
+    "contentRiskClass": { "enum": ["low", "medium", "high", "restricted"] },
+    "humanOwnerRole": { "type": "string", "minLength": 1 },
+    "outputContract": { "type": "object", "additionalProperties": false, "required": ["findingFields", "noProseChanges", "receiptRequiredForMachineClaims"], "properties": { "findingFields": { "$ref": "#/$defs/stringSet" }, "noProseChanges": { "const": true }, "receiptRequiredForMachineClaims": { "const": true } } },
+    "advisoryOnly": { "const": true },
+    "hostMutationAllowed": { "const": false },
+    "externalActionCount": { "const": 0 },
+    "briefDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stringSet": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.stage-override-receipt/v1",
+  "title": "Physical Stage Override Receipt",
+  "type": "object",
+  "required": ["schemaVersion", "receiptId", "status", "projectId", "inputDigest", "gateIds", "issuedAt", "currentReceipt", "receiptDigestAlgorithm", "receiptDigest"],
+  "properties": {
+    "schemaVersion": {"const": "fbs.stage-override-receipt/v1"},
+    "receiptId": {"type": "string", "minLength": 1},
+    "status": {"const": "approved"},
+    "projectId": {"type": "string", "minLength": 1},
+    "inputDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "gateIds": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "issuedAt": {"type": "string", "format": "date-time"},
+    "expiresAt": {"type": ["string", "null"], "format": "date-time"},
+    "currentReceipt": {"const": true},
+    "receiptDigestAlgorithm": {"const": "sha256_canonical_json_without_receipt_digest_v1"},
+    "receiptDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": true
+}

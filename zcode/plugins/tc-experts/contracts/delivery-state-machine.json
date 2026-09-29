@@ -1,0 +1,84 @@
+{
+  "schema": "fbsir.long-manuscript.delivery-state-machine/v1",
+  "product": {
+    "packageId": "long-manuscript-expert",
+    "productVersion": "26.9.18"
+  },
+  "purpose": "把'生成了'和'交付了'分开。三轴独立演进，任何一轴的进展都不能替代另一轴。吸收自 fbsir-super-partner 的 delivery-state-machine，按长文档交付面改写。",
+  "axes": {
+    "fulfillment": {
+      "meaning": "内容是否真的做出来了",
+      "states": ["ready", "degraded", "partial", "blocked"],
+      "definitions": {
+        "ready": "请求范围内的内容已完整产出，可读、可编辑",
+        "degraded": "内容已产出，但缺少请求的格式层或其他非语义能力",
+        "partial": "只完成了请求范围的一部分，未完成部分已明确列出",
+        "blocked": "缺少会实质改变结果的前提（材料、授权或目标），无法产出可用内容"
+      }
+    },
+    "delivery": {
+      "meaning": "用户是否真的拿到了产物",
+      "states": ["none", "delivered_chat", "delivered_full", "delivered_fallback"],
+      "definitions": {
+        "none": "尚未交付任何产物",
+        "delivered_chat": "已在对话中交付可复制正文",
+        "delivered_full": "已按请求格式交付，且该格式有宿主能力与回读证据",
+        "delivered_fallback": "已交付降级产物，且用户已知悉降级关系"
+      }
+    },
+    "execution": {
+      "meaning": "外部动作是否真的执行了",
+      "states": ["not_requested", "awaiting_approval", "executed", "rejected", "failed"],
+      "definitions": {
+        "not_requested": "本次不涉及外部动作",
+        "awaiting_approval": "已提出动作，等待用户授权",
+        "executed": "动作已执行且有当前回执",
+        "rejected": "用户拒绝执行",
+        "failed": "已尝试但失败，失败原因已说明"
+      }
+    }
+  },
+  "rules": {
+    "blockedIsTerminal": true,
+    "blockedDeliveryState": "none",
+    "chatReadyDeliveryState": "delivered_chat",
+    "fullArtifactRequirements": [
+      "fulfillment_ready",
+      "artifact_manifest_valid",
+      "integrity_passed",
+      "presented",
+      "preview_or_readback_passed"
+    ],
+    "fallbackAllowedFulfillmentStates": ["degraded", "partial"],
+    "fallbackReadyRequiresUserAcceptance": true,
+    "deliveryReceiptAfterApplicableGates": true,
+    "executedRequires": ["approved", "action_receipt_present", "target_readback_passed"],
+    "generatedIsNotDelivered": true,
+    "writtenIsNotReadbackVerified": true,
+    "connectorReceiptIsNotDelivery": true
+  },
+  "forbiddenCombinations": [
+    {
+      "combination": "fulfillment=blocked 且 delivery=delivered_full",
+      "reason": "被阻断时不存在可交付的完整产物"
+    },
+    {
+      "combination": "delivery=delivered_full 但无宿主能力或回读证据",
+      "reason": "假成功；见 contracts/fallback-matrix.json 的 FORMAT_FALSE_SUCCESS_FORBIDDEN"
+    },
+    {
+      "combination": "execution=executed 但无当前回执",
+      "reason": "计划、请求已发出或后台可能完成都不是执行成功"
+    },
+    {
+      "combination": "delivery=delivered_fallback 但未告知用户降级关系",
+      "reason": "降级产物不等于请求格式，必须明示"
+    }
+  ],
+  "notes": [
+    "三轴独立：fulfillment=ready 不代表 delivery=delivered_full；delivery=delivered_chat 不代表 execution=executed。",
+    "回读失效规则：任何后续写入都使此前的回读证据失效，delivery 状态须随之回退。",
+    "连接器的 skill_consume 回执只证明进度记录，不构成产物交付。"
+  ],
+  "evidenceBoundary": "package_local_state_policy_only_not_host_receipt_or_end_to_end_delivery_proof"
+}

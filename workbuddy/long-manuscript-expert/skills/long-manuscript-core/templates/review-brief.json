@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_review_brief",
+  "projectId": "replace-project-id",
+  "chapterId": "replace-chapter-id",
+  "chapterDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "role": "read_only_reviewer",
+  "writingOwner": "primary_author",
+  "reviewFocus": ["structure", "continuity", "readability", "evidence"],
+  "standards": ["report anchored findings without prose mutation"],
+  "sourceRefs": [],
+  "contentRiskClass": "low",
+  "humanOwnerRole": "editorial_reviewer",
+  "outputContract": {
+    "findingFields": ["location", "severity", "finding", "evidenceRef"],
+    "noProseChanges": true,
+    "receiptRequiredForMachineClaims": true
+  },
+  "advisoryOnly": true,
+  "hostMutationAllowed": false,
+  "externalActionCount": 0,
+  "briefDigest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

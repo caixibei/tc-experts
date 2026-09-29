@@ -1,0 +1,66 @@
+{
+  "name": "mai-deal-advisor",
+  "version": "1.3.7",
+  "description": "MAI Lab并购Agent：把零散材料理成可推进的交易路径，完成项目拆解、结构梳理、数字核验和报告准备。",
+  "author": {
+    "name": "MAI Deal Inc.",
+    "email": "admin@maideal.com"
+  },
+  "agents": [
+    "./agents/mai-deal-advisor.md"
+  ],
+  "skills": [
+    "./skills/mai-transaction-structure",
+    "./skills/mai-cap-table-check",
+    "./skills/mai-valuation-range"
+  ],
+  "plugin": "mai-deal-advisor",
+  "expertType": "agent",
+  "agentName": "mai-deal-advisor",
+  "displayName": {
+    "en": "MAI Lab并购Agent",
+    "zh": "MAI Lab并购Agent"
+  },
+  "profession": {
+    "en": "项目来了，先把路理清",
+    "zh": "项目来了，先把路理清"
+  },
+  "displayDescription": {
+    "en": "材料可以很乱，交易不能乱：先看清阶段、缺口和下一步，再画结构、核数字、整理报告。",
+    "zh": "材料可以很乱，交易不能乱：先看清阶段、缺口和下一步，再画结构、核数字、整理报告。"
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "08-FinanceInvestment",
+  "defaultInitPrompt": {
+    "zh": "客户刚把材料发来，先帮我看清这单在哪一步、最缺什么、先做什么",
+    "en": "客户刚把材料发来，先帮我看清这单在哪一步、最缺什么、先做什么"
+  },
+  "tags": [
+    {
+      "en": "项目拆解",
+      "zh": "项目拆解"
+    },
+    {
+      "en": "交易结构图",
+      "zh": "交易结构图"
+    },
+    {
+      "en": "买方与资金对接",
+      "zh": "买方与资金对接"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "en": "客户刚把材料发来，先帮我看清这单在哪一步、最缺什么、先做什么",
+      "zh": "客户刚把材料发来，先帮我看清这单在哪一步、最缺什么、先做什么"
+    },
+    {
+      "en": "把这套交易画清楚，并核对每一步的持股变化",
+      "zh": "把这套交易画清楚，并核对每一步的持股变化"
+    },
+    {
+      "en": "这单该找谁谈？先梳理最值得验证的买方和资金路径",
+      "zh": "这单该找谁谈？先梳理最值得验证的买方和资金路径"
+    }
+  ]
+}

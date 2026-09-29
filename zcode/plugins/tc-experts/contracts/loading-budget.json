@@ -1,0 +1,122 @@
+{
+  "schema": "fbsir.loading-budget/v1",
+  "product": {
+    "packageId": "long-manuscript-expert",
+    "productVersion": "26.9.18",
+    "baselineVersion": "26.9.10"
+  },
+  "purpose": "把'加载尽量小'变成可测数字。约束模型常驻上下文体积、禁止默认加载的资源类别，并记录基线实测值用于回归对比。",
+  "whatCountsAsResident": {
+    "modelResidentFiles": [
+      "agents/long-manuscript-expert.md",
+      "skills/long-manuscript-core/SKILL.md"
+    ],
+    "hostMetadataFiles": [
+      ".codebuddy-plugin/plugin.json"
+    ],
+    "note": "agent md 是 Agent 系统提示，SKILL.md 是 Skill 入口，二者每次会话都进入模型上下文，是首字延迟的主因。plugin.json 由宿主读取，只有 displayDescription / quickPrompts / defaultInitPrompt 会呈现给用户与模型，不整份注入。"
+  },
+  "baseline": {
+    "measuredOn": "2026-09-18",
+    "version": "26.9.10",
+    "modelResidentBytes": 66148,
+    "modelResidentFiles": {
+      "agents/long-manuscript-expert.md": 34968,
+      "skills/long-manuscript-core/SKILL.md": 31180
+    },
+    "packageFileCount": 340,
+    "selfCheckSeconds": 0.791,
+    "note": "包内自检 0.79 秒完成 44 项接口 + 92 条路由 + 5 项资产检查，加载卡顿与脚本执行无关，主因是常驻上下文体积。"
+  },
+  "measured26_9_18": {
+    "measuredOn": "2026-09-18",
+    "modelResidentBytes": 30672,
+    "modelResidentFiles": {
+      "agents/long-manuscript-expert.md": 19576,
+      "skills/long-manuscript-core/SKILL.md": 11096
+    },
+    "hostMetadataBytes": {
+      ".codebuddy-plugin/plugin.json": 6163
+    },
+    "reductionBytes": 35476,
+    "reductionPercent": 53.6,
+    "packageFileCount": 364,
+    "manifestEntryCount": 362
+  },
+  "budget": {
+    "modelResidentBudgetBytes": 30720,
+    "perFileCeilingBytes": {
+      "agents/long-manuscript-expert.md": 19456,
+      "skills/long-manuscript-core/SKILL.md": 12288
+    },
+    "maxSingleFileBytes": 131072,
+    "packageFileCountCeiling": 400
+  },
+  "budgetRevision": {
+    "preAnalysisTarget": 24576,
+    "firstImplementationTarget": 28672,
+    "finalBudget": 30720,
+    "reason": "24,576 是分析阶段的预估目标，未考虑两点：① agent md 必须保留写作标准、禁令、证据状态与首值契约等始终生效的规则，压到 17 KB 以下会开始损伤行为可靠性；② SKILL.md 的『任务→参考路由表』本身就是实现按需加载的机制，为凑字节数而压缩它等于拆掉刚建好的机制。30,720 是实测可达且不损伤行为的水平。",
+    "honestBoundary": "这是包内预算，不是宿主端首字延迟的实测结论。本次只量化了输入体积，未做端到端延迟测量。"
+  },
+  "onDemandRule": {
+    "policy": "only_load_resources_triggered_by_the_current_task",
+    "routingTableRequired": true,
+    "routingTableLocation": "skills/long-manuscript-core/SKILL.md#任务--参考路由表",
+    "longTailIndexLocation": "skills/long-manuscript-core/references/reference-routing-detail.md",
+    "noDirectoryExploration": true,
+    "noGlobOrGrepForPackageContracts": true,
+    "note": "只读本轮实际触发的资源。禁止为发现契约而扫描目录或搜索包内源码。"
+  },
+  "forbiddenDefaultLoad": [
+    {
+      "path": "skills/long-manuscript-core/schemas/**",
+      "bytes": 1126400,
+      "reason": "84 个门禁与对象 schema，仅门禁工具需要；其中 gate-invocation.schema.json 391KB、gate-evidence.schema.json 328KB"
+    },
+    {
+      "path": "skills/long-manuscript-core/resources/gates/**",
+      "bytes": 225978,
+      "reason": "quality-gate-applicability.json 单文件 226KB，仅门禁工具需要"
+    },
+    {
+      "path": "skills/long-manuscript-core/scenes/**",
+      "bytes": 262144,
+      "reason": "21 个场景包，仅命中场景后按需读取单个文件"
+    }
+  ],
+  "oversizedFileGuard": {
+    "thresholdBytes": 131072,
+    "files": [
+      "skills/long-manuscript-core/schemas/gate-invocation.schema.json",
+      "skills/long-manuscript-core/schemas/gate-evidence.schema.json",
+      "skills/long-manuscript-core/resources/gates/quality-gate-applicability.json"
+    ],
+    "action": "listed_in_skill_forbidden_default_load",
+    "notDone": "未在这些文件内写入 $comment 标记：修改 391KB / 328KB 的 schema 会改变文件哈希并可能触发严格校验器告警，收益不足以覆盖风险。改由 SKILL.md 禁载清单与路由表约束。"
+  },
+  "dependencyHygiene": {
+    "path": "skills/long-manuscript-core/node_modules/glob",
+    "decision": "keep",
+    "reason": "26.9.18 计划中曾拟移除此桩包，实测后撤回：7 个脚本（final-manuscript-clean-gate / gates-polish-gate / gates-final-manuscript-clean / merge-chapters / source-write-backup / quality-auditor / quality-auditor-lite）以 bare specifier 导入 globSync，且 runtime-health.mjs 的 discoverCoreRuntimeClosure 会把无法解析的 bare specifier 记为 bare_missing。移动需改 7 处导入并可能影响闭包分析，收益仅为目录名观感，风险大于收益。",
+    "revisitWhen": "runtime-health 闭包分析显式豁免包内自研依赖时"
+  },
+  "verification": {
+    "commands": [
+      "node skills/long-manuscript-core/scripts/expert-tools.mjs --check",
+      "node skills/long-manuscript-core/scripts/lib/format-degrade.mjs",
+      "python skills/long-manuscript-core/scripts/docx-edit-self-test.py"
+    ],
+    "mustRemain": {
+      "expertToolsOk": true,
+      "selfTestTotal": 44,
+      "routePassedCount": 92,
+      "fixturePresenceCount": 5,
+      "formatDegradeTotal": 8,
+      "docxEditTotal": 16
+    },
+    "budgetCheck": "sum(bytes of modelResidentFiles) <= modelResidentBudgetBytes",
+    "currentResult": "30672 <= 30720 PASS"
+  },
+  "evidenceBoundary": "package_local_budget_policy_only_not_host_enforcement_or_measured_end_to_end_latency"
+}

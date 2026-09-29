@@ -1,0 +1,563 @@
+{
+  "connectorInfluencesRoute": false,
+  "entries": [
+    {
+      "packSha256": "013d7bbf7f0c6ab7ac3a4721c19897c4c936c89cefc83b0a3ad0a1bf183331a4",
+      "sceneId": "general",
+      "triggers": [
+        {
+          "signal": "long document",
+          "weight": 1
+        },
+        {
+          "signal": "multi chapter draft",
+          "weight": 0.9
+        },
+        {
+          "signal": "复杂长文档",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "ff29d6fa4b6212bd0722a96252199f5678c37feb30b348d8ef2fb0d4eb292921",
+      "sceneId": "academic-monograph",
+      "triggers": [
+        {
+          "signal": "literature review",
+          "weight": 1
+        },
+        {
+          "signal": "academic monograph",
+          "weight": 0.9
+        },
+        {
+          "signal": "学术专著",
+          "weight": 0.8
+        },
+        {
+          "signal": "教学笔记",
+          "weight": 0.9
+        },
+        {
+          "signal": "汇编成专著",
+          "weight": 0.9
+        }
+      ]
+    },
+    {
+      "packSha256": "bc5f3a24182de44acd2f050a7c27b3ab2660fcc31578f70a3c55877c04314665",
+      "sceneId": "annual-chronicle",
+      "triggers": [
+        {
+          "signal": "annual chronicle",
+          "weight": 1
+        },
+        {
+          "signal": "yearbook",
+          "weight": 0.9
+        },
+        {
+          "signal": "年度大事记",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "05939b981549cd5ac8f3d45b33ba3ad24f298e533068a45ddd7ed151d688f3a9",
+      "sceneId": "biography-memorial",
+      "triggers": [
+        {
+          "signal": "biography",
+          "weight": 1
+        },
+        {
+          "signal": "memorial book",
+          "weight": 0.9
+        },
+        {
+          "signal": "人物纪念文集",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "539dacb65e5493a69b1b65785152e9d7d07054657677491384b62c74e10bb20d",
+      "sceneId": "brand-story-longform",
+      "triggers": [
+        {
+          "signal": "founder story",
+          "weight": 1
+        },
+        {
+          "signal": "brand longform",
+          "weight": 0.9
+        },
+        {
+          "signal": "品牌故事",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "50200ebf8cb1636d68fb50655eb7d7e1c8b64dc3a48e6bfbbb6f1a5a8cf595c8",
+      "sceneId": "casebook",
+      "triggers": [
+        {
+          "signal": "casebook",
+          "weight": 1
+        },
+        {
+          "signal": "project retrospective collection",
+          "weight": 0.9
+        },
+        {
+          "signal": "案例复盘集",
+          "weight": 0.8
+        },
+        {
+          "signal": "项目复盘",
+          "weight": 0.95
+        },
+        {
+          "signal": "项目案例集",
+          "weight": 0.9
+        },
+        {
+          "signal": "项目的复盘",
+          "weight": 0.95
+        }
+      ]
+    },
+    {
+      "packSha256": "fc2fae24e3ab6ed3c8bae95c97b2f48737e255b9b39d56cb702b4a9437c91e6c",
+      "sceneId": "collection-album",
+      "triggers": [
+        {
+          "signal": "collection album",
+          "weight": 1
+        },
+        {
+          "signal": "portfolio book",
+          "weight": 0.9
+        },
+        {
+          "signal": "作品纪念册",
+          "weight": 0.8
+        },
+        {
+          "signal": "成长记录",
+          "weight": 0.95
+        },
+        {
+          "signal": "成长纪念册",
+          "weight": 0.95
+        }
+      ]
+    },
+    {
+      "packSha256": "5e86e6babe675fcd2fd938239dc133c5df8ba892d5fe7da8848b913b605502e9",
+      "sceneId": "conference-proceedings",
+      "triggers": [
+        {
+          "signal": "conference proceedings",
+          "weight": 1
+        },
+        {
+          "signal": "forum outcomes",
+          "weight": 0.9
+        },
+        {
+          "signal": "会议成果册",
+          "weight": 0.8
+        },
+        {
+          "signal": "行业峰会",
+          "weight": 0.95
+        },
+        {
+          "signal": "会议发言整理",
+          "weight": 0.9
+        }
+      ]
+    },
+    {
+      "packSha256": "2930582ddc5fe4640b878c150dce7f04aa1b097b194168e2489185425accff27",
+      "sceneId": "consulting-decision-report",
+      "triggers": [
+        {
+          "signal": "decision report",
+          "weight": 1
+        },
+        {
+          "signal": "consulting recommendation",
+          "weight": 0.9
+        },
+        {
+          "signal": "决策建议书",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "08bb090db9f2f2ae25e1b0e1c93b883e438598cc3e5d7506ed158a0ecdac21df",
+      "sceneId": "cultural-heritage",
+      "triggers": [
+        {
+          "signal": "cultural heritage archive",
+          "weight": 1
+        },
+        {
+          "signal": "local tradition",
+          "weight": 0.9
+        },
+        {
+          "signal": "非遗档案",
+          "weight": 0.8
+        },
+        {
+          "signal": "传统技艺",
+          "weight": 0.95
+        },
+        {
+          "signal": "非物质文化遗产",
+          "weight": 1
+        },
+        {
+          "signal": "地方文化",
+          "weight": 0.85
+        },
+        {
+          "signal": "traditional craft",
+          "weight": 0.9
+        },
+        {
+          "signal": "非遗手艺",
+          "weight": 0.95
+        },
+        {
+          "signal": "非遗匠人",
+          "weight": 0.95
+        }
+      ]
+    },
+    {
+      "packSha256": "685962ee42ad26851d6b3ef93879153cfbe43b968eb5b0963d099dcb35cfda94",
+      "sceneId": "expert-book",
+      "triggers": [
+        {
+          "signal": "expert methodology book",
+          "weight": 1
+        },
+        {
+          "signal": "thought leadership book",
+          "weight": 0.9
+        },
+        {
+          "signal": "专家思想书",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "7af265515025e540bf027bfdf144bbb1eec782551fdcf930acce76e7d5f11b76",
+      "sceneId": "genealogy",
+      "triggers": [
+        {
+          "signal": "genealogy",
+          "weight": 1
+        },
+        {
+          "signal": "family history",
+          "weight": 0.9
+        },
+        {
+          "signal": "家谱家史",
+          "weight": 0.8
+        },
+        {
+          "signal": "家族史",
+          "weight": 0.95
+        },
+        {
+          "signal": "祖辈回忆",
+          "weight": 0.9
+        },
+        {
+          "signal": "家族老照片",
+          "weight": 0.85
+        },
+        {
+          "signal": "家族迁徙",
+          "weight": 0.95
+        },
+        {
+          "signal": "家风家训",
+          "weight": 0.9
+        },
+        {
+          "signal": "族谱",
+          "weight": 0.95
+        }
+      ]
+    },
+    {
+      "packSha256": "297d33c6c49155ce30e86e0adc7cf1cc4629886baeb7e085200ac9c0fd28893c",
+      "sceneId": "investigative-report-restricted",
+      "triggers": [
+        {
+          "signal": "restricted investigation",
+          "weight": 1
+        },
+        {
+          "signal": "protected source report",
+          "weight": 0.9
+        },
+        {
+          "signal": "受限调查专题",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "37bdeda9ae093c931b8f3cda3f291269ebcaab6981a6a13901ccb0eb57bbac77",
+      "sceneId": "memoir-oral-history",
+      "triggers": [
+        {
+          "signal": "oral history",
+          "weight": 1
+        },
+        {
+          "signal": "memoir interviews",
+          "weight": 0.9
+        },
+        {
+          "signal": "回忆录口述史",
+          "weight": 0.8
+        },
+        {
+          "signal": "口述史",
+          "weight": 1
+        },
+        {
+          "signal": "口述录音",
+          "weight": 0.95
+        },
+        {
+          "signal": "人物回忆录",
+          "weight": 0.9
+        },
+        {
+          "signal": "口述回忆",
+          "weight": 0.95
+        },
+        {
+          "signal": "员工访谈",
+          "weight": 0.9
+        }
+      ]
+    },
+    {
+      "packSha256": "190e45dfe2d370400cd0a3d5a87b493f9353de2e64d7c853e2b5a634422c6c2e",
+      "sceneId": "operation-manual",
+      "triggers": [
+        {
+          "signal": "operation manual",
+          "weight": 1
+        },
+        {
+          "signal": "maintenance procedure",
+          "weight": 0.9
+        },
+        {
+          "signal": "操作维修手册",
+          "weight": 0.8
+        },
+        {
+          "signal": "设备维护步骤",
+          "weight": 0.95
+        },
+        {
+          "signal": "维修操作规程",
+          "weight": 0.9
+        },
+        {
+          "signal": "设备说明书",
+          "weight": 0.95
+        },
+        {
+          "signal": "设备日常保养",
+          "weight": 0.95
+        },
+        {
+          "signal": "故障排查",
+          "weight": 0.9
+        }
+      ]
+    },
+    {
+      "packSha256": "56d4970aa7af43994741a4276779bd4bc0d5faf352f45d85f0b47815b1f04a7e",
+      "sceneId": "organization-history",
+      "triggers": [
+        {
+          "signal": "organization history",
+          "weight": 1
+        },
+        {
+          "signal": "school history",
+          "weight": 0.9
+        },
+        {
+          "signal": "企业志校史",
+          "weight": 0.8
+        },
+        {
+          "signal": "公司周年",
+          "weight": 0.95
+        },
+        {
+          "signal": "集团周年",
+          "weight": 0.95
+        },
+        {
+          "signal": "发展回顾册",
+          "weight": 0.9
+        },
+        {
+          "signal": "回顾册",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "packSha256": "9528a20e98dc8526c269f3d55db2340b424393b1b5ad86608813947f41b501d1",
+      "sceneId": "policy-standard-guide",
+      "triggers": [
+        {
+          "signal": "policy implementation guide",
+          "weight": 1
+        },
+        {
+          "signal": "standard guide",
+          "weight": 0.9
+        },
+        {
+          "signal": "规范实施指南",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "6ec04d0f3e292caf29507fcbffaf6460e414913f51eaf125e5000f92b924a119",
+      "sceneId": "proposal-rfp",
+      "triggers": [
+        {
+          "signal": "RFP response",
+          "weight": 1
+        },
+        {
+          "signal": "bid proposal",
+          "weight": 0.9
+        },
+        {
+          "signal": "投标申报材料",
+          "weight": 0.8
+        },
+        {
+          "signal": "投标技术方案",
+          "weight": 0.95
+        },
+        {
+          "signal": "技术投标方案",
+          "weight": 0.95
+        },
+        {
+          "signal": "投标用的技术方案",
+          "weight": 0.95
+        }
+      ]
+    },
+    {
+      "packSha256": "768bed60baa8dfc8745998372abbff51fa251fa227788d8e6b12b962e7d3c8c5",
+      "sceneId": "technical-documentation",
+      "triggers": [
+        {
+          "signal": "technical documentation",
+          "weight": 1
+        },
+        {
+          "signal": "API reference",
+          "weight": 0.9
+        },
+        {
+          "signal": "持续版本技术文档",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "packSha256": "58e86e01fd47fe13af89a43c5e0f667c0e567c749951d95137de8dad68f236d4",
+      "sceneId": "training-course",
+      "triggers": [
+        {
+          "signal": "training course",
+          "weight": 1
+        },
+        {
+          "signal": "instructor manual",
+          "weight": 0.9
+        },
+        {
+          "signal": "培训课程双手册",
+          "weight": 0.8
+        },
+        {
+          "signal": "讲课录音",
+          "weight": 0.95
+        },
+        {
+          "signal": "培训录音",
+          "weight": 0.95
+        }
+      ]
+    },
+    {
+      "packSha256": "cb796624abb2f52b201ddd14ae5db698690a35cda5ffebf85f014159c4aa958a",
+      "sceneId": "whitepaper-research",
+      "triggers": [
+        {
+          "signal": "industry whitepaper",
+          "weight": 1
+        },
+        {
+          "signal": "research report",
+          "weight": 0.9
+        },
+        {
+          "signal": "白皮书行业研究",
+          "weight": 0.8
+        },
+        {
+          "signal": "行业研究报告",
+          "weight": 1
+        },
+        {
+          "signal": "行业分析报告",
+          "weight": 0.95
+        },
+        {
+          "signal": "技术方案白皮书",
+          "weight": 0.95
+        },
+        {
+          "signal": "产品架构方案",
+          "weight": 0.9
+        }
+      ]
+    }
+  ],
+  "normalization": "NFKC_lowercase_whitespace",
+  "packDigestAlgorithm": "sha256_utf8_lf_v1",
+  "schemaVersion": "1.1.0",
+  "threshold": 0.8
+}

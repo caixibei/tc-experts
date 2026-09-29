@@ -1,0 +1,153 @@
+{
+  "name": "long-manuscript-expert",
+  "version": "26.9.18",
+  "description": "WorkBuddy-native ManuscriptOS expert for multimodal material intake, source-aware drafting, project resumption, bounded revision, and finished-draft delivery across 21 long-document scenes.",
+  "author": {
+    "name": "FBSir",
+    "email": "unique@u3w.com"
+  },
+  "agents": [
+    "./agents/long-manuscript-expert.md"
+  ],
+  "skills": [
+    "./skills/long-manuscript-core"
+  ],
+  "dependencies": {
+    "connectors": [
+      "fbs-connector"
+    ]
+  },
+  "expertType": "agent",
+  "agentName": "long-manuscript-expert",
+  "experienceModel": {
+    "connectorRequired": true,
+    "connectorId": "fbs-connector",
+    "connectorPublicName": "福帮手人机协同连接器",
+    "firstValueRequiresConnector": false,
+    "declaredVia": "plugin.json#/dependencies/connectors",
+    "entryPolicy": "contracts/connector-entry-policy.json",
+    "loadingBudget": "contracts/loading-budget.json",
+    "preConfirmationWorkspaceWriteAllowed": false,
+    "questionsMax": 1,
+    "questionsPolicy": "blocking_only"
+  },
+  "runtimeContract": {
+    "schema": "fbsir-long-manuscript-expert-runtime-contract/v1",
+    "version": "26.9.18",
+    "host": "WorkBuddy",
+    "connectorRequired": true,
+    "connectorAssumedAvailable": false,
+    "packageCapabilityDependsOnConnector": false,
+    "optionalEnhancementOnly": true,
+    "connectorRequiredForFirstValue": false,
+    "sameBindingRequiredForFirstValue": false,
+    "sameBindingRequiredForClosure": true,
+    "defaultFirstValueSurface": "chat_response_only",
+    "workspaceWriteRequiresExplicitUserRequest": true,
+    "connectorToolChain": [
+      "skill_whoami",
+      "fbs_scene_pack_query",
+      "skill_consume"
+    ],
+    "noConnectorFirstValue": {
+      "firstValueDoesNotRequireConnector": true,
+      "serviceToolOptionalEnhancementOnly": true,
+      "doNotAssumeHostRuntimeUpgrade": true
+    },
+    "serviceUnavailablePolicy": {
+      "localDeliverablesPreserved": true,
+      "remoteDependentNextStepsPaused": true,
+      "userAskedToTroubleshootConnector": false,
+      "mayClaimServiceSuccess": false
+    },
+    "attributionPolicy": {
+      "attributionFieldsMustTravelTogether": true,
+      "unknownAttributionPolicy": "keep_unknown_until_source_field_is_observed",
+      "forbiddenIdentityFields": [
+        "phone",
+        "email",
+        "idCard",
+        "realName",
+        "rawDeviceId",
+        "rawIp"
+      ]
+    },
+    "frontstageLexicon": {
+      "internalTermsMustNotAppear": [
+        "skill_whoami",
+        "fbs_scene_pack_query",
+        "skill_consume",
+        "actionEnvelope",
+        "MCP",
+        "connector",
+        "binding",
+        "token",
+        "hash",
+        "trace",
+        "idempotencyKey"
+      ],
+      "businessRewrites": {
+        "service_tools_loaded": "我已开始按流程处理这份材料",
+        "connector_not_authorized": "这次先在对话里把稿子做出来，需要走服务端时我再提示你",
+        "receipt_missing": "这一步还没有确认结果，我不当作已完成"
+      }
+    }
+  },
+  "guardrails": {
+    "visibleJsonForbidden": true,
+    "internalIdVisibleForbidden": true,
+    "noAutomaticPublishing": true,
+    "noAutomaticFileOverwrite": true,
+    "offerAfterFirstValueOnly": true,
+    "noMachineClaimWithoutCurrentReceipt": true,
+    "residentContextBudgetEnforced": true
+  },
+  "displayName": {
+    "en": "FBSir",
+    "zh": "福帮手"
+  },
+  "profession": {
+    "en": "Long-form Writing and Revision Expert",
+    "zh": "长文档写作与改稿专家"
+  },
+  "displayDescription": {
+    "en": "Tens of thousands of words without drifting off-topic or sounding like AI. Mixed documents, scans, images, tables, and old drafts become continuable, traceable, deliverable long manuscripts.",
+    "zh": "轻松几十万字，不跑题，没有AI味。混杂文档、扫描件、图片、表格与旧稿编成可续接可追溯可交付的长文档。"
+  },
+  "avatar": "avatars/fbsir-icon.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "These interview notes, scans, and tables need to become a full-length manuscript. Say what you can actually see first, then give me an editable outline and an opening that doesn't read like AI, and end with the next step.",
+    "zh": "这堆访谈笔记、扫描件和表格，我要写成几十万字的正式稿。先说你实际能看到哪些材料，再给可编辑目录和一段没有AI味的开篇，最后说下一步。"
+  },
+  "plugin": "long-manuscript-expert",
+  "tags": [
+    {
+      "en": "Long-document Systems",
+      "zh": "长文档工程"
+    },
+    {
+      "en": "Multi-scene Creation",
+      "zh": "多场景创作"
+    },
+    {
+      "en": "Evidence and Review",
+      "zh": "证据与审校"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "en": "These interview notes, scans, and tables need to become a full-length manuscript. Say what you can actually see first, then give me an editable outline and an opening that doesn't read like AI, and end with the next step.",
+      "zh": "这堆访谈笔记、扫描件和表格，我要写成几十万字的正式稿。先说你实际能看到哪些材料，再给可编辑目录和一段没有AI味的开篇，最后说下一步。"
+    },
+    {
+      "en": "Continue the book from where we left off, or revise only the section I mark. Align with the finished chapters and any changed facts, stay on topic, leave my locked text alone, and give me the revised passage plus one next step.",
+      "zh": "接着上次那本往下写，或者只改我圈出来的这一节。请对齐已完成的章节和事实变化，别跑题，也别动我锁定的部分，给我改后正文和一个下一步。"
+    },
+    {
+      "en": "This draft is ready to deliver. Review it for structure, consistency, readability, and delivery readiness, then give me a closure checklist and replacement text for the most important issue.",
+      "zh": "这份稿子准备交付了，帮我从结构、前后一致、可读性和交付准备过一遍，给一份收口清单，以及最关键那处的替换正文。"
+    }
+  ],
+  "license": "MIT"
+}

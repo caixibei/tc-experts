@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_project_resume_card",
+  "entryId": "project_resume",
+  "projectId": "project-id",
+  "documentType": "general",
+  "continuationCapsule": {
+    "provided": true,
+    "digest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "currentAnchor": "稳定锚点",
+    "nextObjective": "下一节目标",
+    "savedBySystem": false
+  },
+  "evidenceBindings": {
+    "projectStatusDigest": null,
+    "chapterCheckpointDigest": null,
+    "factDeltaDigest": null,
+    "objectiveBindingDigest": null
+  },
+  "reconciliation": {
+    "status": "capsule_only",
+    "projectState": null,
+    "chapterState": null,
+    "currentAnchor": "稳定锚点",
+    "nextObjective": "下一节目标",
+    "lockedConstraints": [],
+    "unresolvedFacts": [],
+    "issues": []
+  },
+  "firstValue": {
+    "editableStructure": { "nextSection": "待续章节" },
+    "substantiveText": "从稳定锚点继续的一段可编辑正文。",
+    "singleNextStep": "补充当前项目状态后继续。"
+  },
+  "evidenceState": "advisory",
+  "currentMachineReceiptDigests": [],
+  "connectorRequired": false,
+  "externalToolsAvailableSemantics": "declaration_only",
+  "externalToolAutoTriggered": false,
+  "optionalPortAutoTriggered": false,
+  "writesPerformed": false,
+  "hostGoalClaimed": false,
+  "officialListingClaimed": false,
+  "cardDigest": "ffec0d479366ad64f29a14a42241765a5b1417852881907b77a0912b1014e588"
+}

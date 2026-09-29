@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.consent-state/v1",
+  "title": "Source Consent State",
+  "type": "object",
+  "required": ["subjectId", "scope", "status", "decidedBy"],
+  "properties": {
+    "subjectId": {"type": "string", "minLength": 1},
+    "scope": {"enum": ["private", "family_only", "manuscript_allowed", "public_allowed", "anonymized"]},
+    "status": {"enum": ["pending", "confirmed", "withdrawn", "disputed", "expired"]},
+    "decidedBy": {"type": "string", "minLength": 1},
+    "evidenceRef": {"type": ["string", "null"]},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

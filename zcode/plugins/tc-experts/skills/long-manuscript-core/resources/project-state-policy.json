@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "fbs.project-state-policy/v1",
+  "projectLifecycle": ["intake", "planned", "drafting", "reviewing", "delivery_ready", "delivered"],
+  "allowedTransitions": {
+    "intake": ["planned"],
+    "planned": ["drafting"],
+    "drafting": ["reviewing"],
+    "reviewing": ["drafting", "delivery_ready"],
+    "delivery_ready": ["reviewing", "delivered"],
+    "delivered": ["reviewing"]
+  },
+  "runStages": ["S0", "S1", "S2", "S3", "S4", "S5", "S6"],
+  "materialMaturity": ["L0_frozen", "L1_extracted", "L2_aligned", "L3_mapped", "L4_evidence_ready", "L5_accepted"],
+  "invariants": [
+    "Project lifecycle is the only project-level state authority.",
+    "Run stages record execution progress and do not imply delivery.",
+    "Material maturity is a label and does not create a second state machine.",
+    "Lifecycle self-transitions are invalid; progress within a state belongs in a checkpoint or event receipt.",
+    "A delivered project may re-enter reviewing only as an explicit, digest-bound revision transition.",
+    "A state transition never implies a file write, human approval, publication, or business outcome."
+  ]
+}

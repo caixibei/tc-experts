@@ -1,0 +1,61 @@
+{
+  "name": "wechat-miniprogram-expert",
+  "version": "2.0.0",
+  "description": "WeChat Mini Program development expert specializing in native framework, WXML/WXSS, cloud development, and WeChat ecosystem compliance",
+  "author": {
+    "name": "孤独",
+    "email": "1736065785@qq.com"
+  },
+  "agents": [
+    "./agents/wechat-miniprogram-expert.md"
+  ],
+  "expertType": "agent",
+  "agentName": "wechat-miniprogram-expert",
+  "displayName": {
+    "en": "Minix",
+    "zh": "码小序"
+  },
+  "profession": {
+    "en": "WeChat Mini Program Developer",
+    "zh": "微信小程序开发专家"
+  },
+  "displayDescription": {
+    "en": "Specializes in WeChat Mini Program native development, WXML/WXSS interface building, cloud development, and WeChat ecosystem compliance. Helps build smooth, high-conversion mini program applications.",
+    "zh": "精通微信小程序原生开发框架与微信生态，擅长 WXML/WXSS 界面构建、云开发与支付能力接入、审核合规避坑，帮助打造流畅好用、高转化的微信原生应用。"
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "zh": "帮我开发一个微信小程序",
+    "en": "Build a WeChat Mini Program"
+  },
+  "plugin": "wechat-miniprogram-expert",
+  "tags": [
+    {
+      "en": "Mini Program Dev",
+      "zh": "小程序开发"
+    },
+    {
+      "en": "WeChat Ecosystem",
+      "zh": "微信生态"
+    },
+    {
+      "en": "Cloud Development",
+      "zh": "云开发"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "en": "Build a WeChat Mini Program",
+      "zh": "帮我开发一个微信小程序"
+    },
+    {
+      "en": "Design mini program pages with WXML/WXSS",
+      "zh": "用WXML/WXSS写小程序页面"
+    },
+    {
+      "en": "Integrate WeChat Pay and cloud functions",
+      "zh": "接入微信支付和云函数"
+    }
+  ]
+}

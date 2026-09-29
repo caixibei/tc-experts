@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactType": "manuscriptos_objective_binding",
+  "projectId": "replace-project-id",
+  "objective": "replace with one bounded manuscript objective",
+  "acceptanceCriteria": ["replace with one observable acceptance criterion"],
+  "projectStateDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "ownerRole": "manuscript_owner",
+  "status": "planned",
+  "completionEvidenceDigests": [],
+  "blockers": [],
+  "persistenceClaim": "user_visible_object_only",
+  "hostMutationAllowed": false,
+  "externalActionCount": 0,
+  "bindingDigest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

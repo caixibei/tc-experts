@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/workspace-transaction-plan.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "transactionId", "writes", "targetPolicy", "rollbackRequirement", "status", "issues", "executionAllowed", "hostMutationAllowed", "writesPerformed", "externalActionCount", "planDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_workspace_transaction_plan" },
+    "transactionId": { "type": "string", "minLength": 1 },
+    "writes": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["relativePath", "mediaType", "byteLength", "sha256", "intent"], "properties": { "relativePath": { "type": "string", "minLength": 1 }, "mediaType": { "type": "string", "minLength": 1 }, "byteLength": { "type": "integer", "minimum": 0 }, "sha256": { "$ref": "#/$defs/sha256" }, "intent": { "const": "create_candidate" } } } },
+    "targetPolicy": { "const": "plan_only_no_host_mutation" },
+    "rollbackRequirement": { "const": "required_if_promoted_to_authorized_executor" },
+    "status": { "enum": ["ready", "rejected"] },
+    "issues": { "$ref": "#/$defs/stringSet" },
+    "executionAllowed": { "const": false },
+    "hostMutationAllowed": { "const": false },
+    "writesPerformed": { "const": false },
+    "externalActionCount": { "const": 0 },
+    "planDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stringSet": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

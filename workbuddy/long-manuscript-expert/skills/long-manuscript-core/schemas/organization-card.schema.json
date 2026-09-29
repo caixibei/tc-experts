@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/organization-card.schema.json",
+  "title": "Normalized chapter organization card",
+  "$comment": "API input schema is #/$defs/buildInput. Runtime additionally enforces unique progression IDs, progression sourceRefs as a subset of selectedSourceRefs, no self-neighbor and no identical non-null neighbors. A standard structural schema alone does not establish these cross-field relations or source truth.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifactType",
+    "chapterId",
+    "purpose",
+    "readerQuestion",
+    "progression",
+    "selectedSourceRefs",
+    "adjacent",
+    "knownMissingInfo",
+    "constraints",
+    "evidenceBoundary",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "manuscriptos.organization-card/v1"
+    },
+    "artifactType": {
+      "const": "chapter_organization_card"
+    },
+    "chapterId": {
+      "$ref": "#/$defs/identifier"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^\\S(?:[\\s\\S]*\\S)?$(?![\\s\\S])",
+      "not": {
+        "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+      }
+    },
+    "readerQuestion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^\\S(?:[\\s\\S]*\\S)?$(?![\\s\\S])",
+      "not": {
+        "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+      }
+    },
+    "progression": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/progressionOutput"
+      }
+    },
+    "selectedSourceRefs": {
+      "type": "array",
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceReference"
+      },
+      "description": "If omitted, derive the union of progression.sourceRefs. If provided, every progression source must belong to it; unused selected references are allowed."
+    },
+    "adjacent": {
+      "$ref": "#/$defs/adjacentOutput"
+    },
+    "knownMissingInfo": {
+      "type": "array",
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/listText"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/listText"
+      }
+    },
+    "evidenceBoundary": {
+      "const": "source_refs_are_references_not_proof; card_is_a_writing_plan"
+    },
+    "status": {
+      "const": "draft_for_writing"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,127}$",
+      "not": {
+        "pattern": "\\s"
+      }
+    },
+    "sourceReference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^\\S(?:[\\s\\S]*\\S)?$(?![\\s\\S])",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "listText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^\\S(?:[\\s\\S]*\\S)?$(?![\\s\\S])",
+      "not": {
+        "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+      }
+    },
+    "progressionInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "completionQuestion"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+          }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          },
+          "description": "Optional in build input; omitted sourceRefs becomes []. Explicit null is invalid."
+        },
+        "completionQuestion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+          }
+        }
+      }
+    },
+    "progressionOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "sourceRefs",
+        "completionQuestion"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$(?![\\s\\S])",
+          "not": {
+            "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+          }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          },
+          "description": "Optional in build input; omitted sourceRefs becomes []. Explicit null is invalid."
+        },
+        "completionQuestion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$(?![\\s\\S])",
+          "not": {
+            "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+          }
+        }
+      }
+    },
+    "adjacentInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "previousId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nextId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "adjacentOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "previousId",
+        "nextId"
+      ],
+      "properties": {
+        "previousId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nextId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "buildInput": {
+      "title": "organizationCard API input",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapterId",
+        "purpose",
+        "readerQuestion",
+        "progression"
+      ],
+      "properties": {
+        "chapterId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+          }
+        },
+        "readerQuestion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]"
+          }
+        },
+        "progression": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/progressionInput"
+          }
+        },
+        "selectedSourceRefs": {
+          "type": "array",
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          },
+          "description": "If omitted, derive the union of progression.sourceRefs. If provided, every progression source must belong to it; unused selected references are allowed."
+        },
+        "adjacent": {
+          "$ref": "#/$defs/adjacentInput"
+        },
+        "knownMissingInfo": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/listText"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/listText"
+          }
+        }
+      }
+    }
+  }
+}

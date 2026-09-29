@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fbs.release-quality-receipt/v1",
+  "title": "Release Quality Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "receiptId", "projectId", "artifactDigest", "issuedAt", "currentReceipt", "status", "receiptDigestAlgorithm", "receiptDigest"],
+  "properties": {
+    "schemaVersion": {"const": "fbs.release-quality-receipt/v1"},
+    "receiptId": {"type": "string", "minLength": 1},
+    "projectId": {"type": "string", "minLength": 1},
+    "artifactDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "issuedAt": {"type": "string", "format": "date-time"},
+    "currentReceipt": {"const": true},
+    "status": {"const": "passed"},
+    "receiptDigestAlgorithm": {"const": "sha256_canonical_json_without_receipt_digest_v1"},
+    "receiptDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

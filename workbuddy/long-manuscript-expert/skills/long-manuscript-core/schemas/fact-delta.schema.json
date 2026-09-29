@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://u3w.com/schemas/manuscriptos/fact-delta.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "baseGraphDigest", "expectedGraphDigest", "changes", "projectedGraph", "newGraphDigest", "status", "issues", "writesPerformed", "externalActionCount", "deltaDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "manuscriptos_fact_delta" },
+    "baseGraphDigest": { "$ref": "#/$defs/sha256" },
+    "expectedGraphDigest": { "$ref": "#/$defs/sha256" },
+    "changes": { "type": "array", "items": { "type": "object" } },
+    "projectedGraph": { "type": "object" },
+    "newGraphDigest": { "$ref": "#/$defs/sha256" },
+    "status": { "enum": ["ready", "rejected"] },
+    "issues": { "$ref": "#/$defs/stringSet" },
+    "writesPerformed": { "const": false },
+    "externalActionCount": { "const": 0 },
+    "deltaDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stringSet": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}
